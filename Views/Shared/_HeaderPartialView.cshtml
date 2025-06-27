@@ -1,0 +1,44 @@
+<header id="header" class="header d-flex align-items-center fixed-top">
+  <link rel="stylesheet" href="~/lib/fontawesome/css/all.min.css" />
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+      <a href="@Url.Action("Index","Home")" class="logo d-flex align-items-center me-auto">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.webp" alt=""> -->
+        <h1 class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img id="img_logo" alt="Logo" style="width: 180px; height: 50px;" src="@Url.Content("~/Content/Images/logo.png")"/></h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="@Url.Action("Index","Home")">Anasayfa</a></li>
+          <li><a href="#about">Hakkımızda</a></li>
+          <li><a href="#contact">İletişim</a></li>
+          <li class="dropdown"><a href="#"><span>Üretim</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="@Url.Action("Uretim","Uretim")">Tahsilat Sistemleri</a></li>
+              <li><a href="@Url.Action("Uretim","Uretim")">KIOSK</a></li>
+              <li><a href="@Url.Action("Uretim","Uretim")">Dijital Akıllı Kürsü</a></li>
+              <li><a href="@Url.Action("Uretim","Uretim")">PC</a></li>
+              <li><a href="@Url.Action("Uretim","Uretim")">HDMOGOP</a></li>
+              <li><a href="@Url.Action("Uretim","Uretim")">Yazılım</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="#"><span>Çözümler</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="@Url.Action("Cozum","Cozum")">Network Çözümleri</a></li>
+              <li><a href="@Url.Action("Cozum","Cozum")">Veri Çözümleri</a></li>
+              <li><a href="@Url.Action("Cozum","Cozum")">Siber Güvenlik Çözümleri</a></li>
+              <li><a href="@Url.Action("Cozum","Cozum")">Kullanıcı Çözümleri</a></li>
+            </ul>
+          </li>
+          <li><a href="#clients">Referanslarımız</a></li>
+          <li><a href="blog.html">Projelerimiz</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <a class="btn-getstarted" href="http://teknikdestek.expresbilgisayar.com/Account/Login?ReturnUrl=%2F" target="_blank" class="nav-link h2">Teknik Destek</a>
+
+    </div>
+  </header>

@@ -1,0 +1,70 @@
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-rtswya2ows] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-rtswya2ows] {
+  color: #0077cc;
+}
+
+.btn-primary[b-rtswya2ows] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-rtswya2ows], .nav-pills .show > .nav-link[b-rtswya2ows] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-rtswya2ows] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-rtswya2ows] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-rtswya2ows] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-rtswya2ows] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-rtswya2ows] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+.dropdown-menu[b-rtswya2ows] {
+    transition: all 0.2s ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+}
+
+.nav-item.dropdown:hover .dropdown-menu[b-rtswya2ows] {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+.nav-link i[b-rtswya2ows] {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0.7;
+}
+
+.nav-link:hover i[b-rtswya2ows] {
+    opacity: 1;
+    transform: scale(1.1);
+}

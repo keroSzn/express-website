@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Clients Swiper</title>
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+  <style>
+    .clients {
+      padding: 40px 0;
+      background-color: #f8f8f8;
+    }
+
+    .swiper {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .swiper-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    .swiper-slide {
+      flex-shrink: 0;
+      width: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .swiper-slide img {
+      width: 120px;
+      height: auto;
+      padding: 0 10px;
+      transition: transform 0.3s;
+    }
+
+    .swiper-slide img:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+
+  <section id="clients" class="clients section light-background">
+    <div class="container">
+
+      <div class="swiper init-swiper">
+        <script type="application/json" class="swiper-config">
+          {
+            "loop": true,
+            "speed": 500,
+            "autoplay": {
+              "delay": 800
+            },
+            "slidesPerView": "auto",
+            "pagination": {
+              "el": ".swiper-pagination",
+              "type": "bullets",
+              "clickable": true
+            },
+            "breakpoints": {
+              "320": { "slidesPerView": 2, "spaceBetween": 20 },
+              "480": { "slidesPerView": 3, "spaceBetween": 30 },
+              "640": { "slidesPerView": 4, "spaceBetween": 40 },
+              "992": { "slidesPerView": 5, "spaceBetween": 50 },
+              "1200": { "slidesPerView": 6, "spaceBetween": 60 }
+            }
+          }
+        </script>
+
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img src="img/b149786049567a74834126977616.jpeg" alt=""></div>
+          <div class="swiper-slide"><img src="img/b165209998067a7479838011030.jpeg" alt=""></div>
+          <div class="swiper-slide"><img src="img/b165210071067a74237435539343.jpeg" alt=""></div>
+          <div class="swiper-slide"><img src="img/b165184093767a7488495546499.png" alt=""></div>
+          <div class="swiper-slide"><img src="img/b149785956667a74817441264486.png" alt=""></div>
+          <div class="swiper-slide"><img src="img/b149786049667a74961610142650.jpeg" alt=""></div>
+          <div class="swiper-slide"><img src="img/b165063015767a7488723436234.png" alt=""></div>
+          <div class="swiper-slide"><img src="img/b165208169567a74374289367140.png" alt=""></div>
+          <div class="swiper-slide"><img src="img/b165208026867a7433110221963.png" alt=""></div>
+
+        </div>
+
+        
+        
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+  <script>
+    function initSwiper() {
+      document.querySelectorAll(".init-swiper").forEach(function (swiperElement) {
+        const config = JSON.parse(swiperElement.querySelector(".swiper-config").innerHTML.trim());
+        new Swiper(swiperElement, config);
+      });
+    }
+
+    window.addEventListener("load", initSwiper);
+  </script>
+</body>
+</html>
