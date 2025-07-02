@@ -2259,4 +2259,5 @@
 /Users/keroszn/express-website/obj/Debug/net9.0/compressed/daw4x9pbk7-86ynaw39ig.gz
 /Users/keroszn/express-website/obj/Debug/net9.0/compressed/3us3pav0d3-0qdbtt6r1b.gz
 /Users/keroszn/express-website/obj/Debug/net9.0/compressed/kgta43z232-2y5207q154.gz
-/Users/keroszn/express-website/obj/Debug/net9.0/compressed/1zjzypywyu-9nzsnunn7t.gz
+/Users/keroszn/express-website/obj/Debug/net9.0/express-website.sourcelink.json
+/Users/keroszn/express-website/obj/Debug/net9.0/compressed/1zjzypywyu-523itqrgsc.gz
