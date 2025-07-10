@@ -2,3 +2,37 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 <h2>Welcome to the Admin Dashboard</h2>
+
+<hr />
+
+<div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">Referanslar Yönetimi</h5>
+    </div>
+    <div class="card-body">
+        <p>Buradan ana sayfada gösterilecek referans görsellerini yönetebilirsiniz.</p>
+        <a href="/Admin/Reference" class="btn btn-outline-primary me-2">Tüm Referansları Gör</a>
+        <a href="/Admin/Reference/Create" class="btn btn-primary">Yeni Referans Ekle</a>
+    </div>
+</div>
+<div class="card mb-4">
+    <div class="card-header bg-success text-white">
+        <h5 class="mb-0">Projeler Yönetimi</h5>
+    </div>
+    <div class="card-body">
+        <p>Projeleri buradan ekleyebilir veya silebilirsiniz.</p>
+        <a href="/Admin/Project" class="btn btn-outline-success me-2">Tüm Projeleri Gör</a>
+        <a href="/Admin/Project/Create" class="btn btn-success">Yeni Proje Ekle</a>
+    </div>
+</div>
+<div class="card mb-4">
+    <div class="card-header bg-danger text-white">
+        <h5 class="mb-0">Bloglar Yönetimi</h5>
+    </div>
+    <div class="card-body">
+        <p>Blogları buradan ekleyebilir veya silebilirsiniz.</p>
+        <a href="/Admin/Blog" class="btn btn-outline-danger me-2">Tüm Blogları Gör</a>
+        <a href="/Admin/Blog/Create" class="btn btn-danger">Yeni Blog Ekle</a>
+        <a href="/Admin/Blog/Edit.cshtml" class="btn btn-danger">Blog Düzenle</a>
+    </div>
+</div>

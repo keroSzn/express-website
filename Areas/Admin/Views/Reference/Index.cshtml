@@ -1,0 +1,21 @@
+@{
+    ViewData["Title"] = "Yeni Referans Görselleri";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model List<string>
+
+
+<h2>Referans Görselleri</h2>
+<a href="/Admin/Reference/Create" class="btn btn-primary mb-3">Yeni Görsel Yükle</a>
+
+<div class="row">
+    @foreach (var image in Model)
+    {
+        <div class="col-md-3 text-center mb-3">
+            <img src="/uploads/references/@image" class="img-fluid rounded border" />
+            <form method="post" asp-action="Delete" asp-route-fileName="@image" onsubmit="return confirm('Silmek istediğinizden emin misiniz?');">
+                <button type="submit" class="btn btn-danger mt-2">Sil</button>
+            </form>
+        </div>
+    }
+</div>

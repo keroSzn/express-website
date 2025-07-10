@@ -1,0 +1,17 @@
+@{
+    ViewData["Title"] = "Yeni Proje";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h2>Yeni Proje Ekle</h2>
+
+<form asp-action="Create" enctype="multipart/form-data" method="post">
+    <div class="mb-3">
+        <label>Görsel Seç:</label>
+        <input type="file" name="image" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label>Açıklama:</label>
+        <input type="text" name="description" class="form-control" maxlength="150" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>

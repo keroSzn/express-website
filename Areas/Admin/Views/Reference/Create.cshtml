@@ -1,0 +1,13 @@
+@{
+    ViewData["Title"] = "Yeni Proje";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h2>Yeni Referans Görseli Yükle</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="imageFile" class="form-label">Görsel Seçin</label>
+        <input class="form-control" type="file" id="imageFile" name="imageFile" required />
+    </div>
+    <button type="submit" class="btn btn-success">Yükle</button>
+</form>

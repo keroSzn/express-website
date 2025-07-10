@@ -1,0 +1,36 @@
+@model List<Blog>
+@{
+    ViewData["Title"] = "Projeler";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+
+<h2>Blog Listesi</h2>
+<a class="btn btn-primary mb-3" href="/Admin/Blog/Create">Yeni Blog Ekle</a>
+<a class="btn btn-primary mb-3" href="/Admin/Blog/Edit">Blog Düzenle</a>
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Tarih</th>
+            <th>Başlık</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var blog in Model)
+        {
+            <tr>
+                <td>@blog.PublishDate.ToString("dd MMM yyyy")</td>
+                <td>@blog.Title</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@blog.Id" class="btn btn-warning btn-sm">Düzenle</a>
+                    <a asp-action="Delete" asp-route-id="@blog.Id" class="btn btn-danger btn-sm">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
