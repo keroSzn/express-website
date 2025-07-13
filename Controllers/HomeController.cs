@@ -6,11 +6,15 @@ namespace express_website.Controllers;
 
 public class HomeController : Controller
 {
+    private AppDbContext _context;
+
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, AppDbContext context)
     {
         _logger = logger;
+
+        _context = context;
     }
 
     public IActionResult Index()
