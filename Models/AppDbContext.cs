@@ -17,6 +17,17 @@ namespace express_website.Models
         public DbSet<ElemanModeliClass> ElemanModeli { get; set; }
         public DbSet<AlanClass> Alan { get; set; }
         public DbSet<HucreClass> Hucre { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<KategoriClass>().HasKey(x => x.KategoriId);
+            modelBuilder.Entity<HakkimizdaClass>().HasKey(x => x.HakkimizdaId);
+            modelBuilder.Entity<BaslikClass>().HasKey(x => x.BaslikId);
+            modelBuilder.Entity<AltBaslikClass>().HasKey(x => x.AltBaslikId);
+            modelBuilder.Entity<ElemanClass>().HasKey(x => x.ElemanId);
+            modelBuilder.Entity<ElemanModeliClass>().HasKey(x => x.ElemanModeliId);
+            modelBuilder.Entity<AlanClass>().HasKey(x => x.AlanId);
+            modelBuilder.Entity<HucreClass>().HasKey(x => x.HucreId);
+        }
         
 
     }

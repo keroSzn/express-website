@@ -1,3 +1,5 @@
+@model List<HakkimizdaClass>
+
 <section id="about" class="about section">
 
       <!-- Section Title -->
@@ -10,13 +12,15 @@
         <div class="row gy-4">
 
           <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
-            <p>
+            <p>@Model.FirstOrDefault(x=>x.HakkimizdaId==1).HakkimizdaMetin</p>
+            @*<p>
               Express Bilgisayar Ltd. Şti. 1999 yılında faaliyetine başlamış ve dünya bilişim pazarında geliştirilen üst düzey çözümleri yakından takip ederek kadrosunu, müşteri ve ürün portföyünü hızla geliştirmiş, en iyi hizmet kalitesi anlayışı ile personellerini eğiterek elde ettiği ürün, tecrübe ve birikimlerini kalite standartlanndan ödün vermeden müşterilerine sunmuştur.
-            </p>
+            </p>*@
           </div>
 
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-            <p>Şirket olarak kazanmış olduğumuz tecrübe ve birikimlerimizden yararlanarak teknolojilerde Ar-Ge çalışması yapmak, milli katmadeğeri artırmak ve üretmek adına 2016 yılı itibari ile GORA YAZILIM ELEKTRONİK BİLİŞİM SAN. TİC. VE LTD. ŞTİ. adı altında donanım ve yazılımın beraber üretileceği grup şirketimiz Konya Teknokent merkezinde çalışma hayatına başlamıştır. </p>
+            <p>@Model.FirstOrDefault(x=>x.HakkimizdaId==2).HakkimizdaMetin</p>
+            @*<p>Şirket olarak kazanmış olduğumuz tecrübe ve birikimlerimizden yararlanarak teknolojilerde Ar-Ge çalışması yapmak, milli katmadeğeri artırmak ve üretmek adına 2016 yılı itibari ile GORA YAZILIM ELEKTRONİK BİLİŞİM SAN. TİC. VE LTD. ŞTİ. adı altında donanım ve yazılımın beraber üretileceği grup şirketimiz Konya Teknokent merkezinde çalışma hayatına başlamıştır. </p>*@
             
           </div>
 
