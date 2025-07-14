@@ -1,0 +1,36 @@
+@model List<express_website.Models.BaslikClass>
+@{
+    ViewData["Title"] = "Başlıklar";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Başlıklar</h2>
+
+<p>
+    <a class="btn btn-success" asp-action="Create">Yeni Başlık Ekle</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Başlık Adı</th>
+            <th>Kategori</th>
+            <th>İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.BaslikId</td>
+                <td>@item.BaslikAdi</td>
+                <td>@item.KategoriClass?.KategoriAdi</td>
+                <td>
+                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@item.BaslikId">Düzenle</a>
+                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.BaslikId">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
