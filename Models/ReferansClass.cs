@@ -8,6 +8,6 @@ namespace express_website.Models
         public byte[]? ReferansGorsel { get; set; }
 
         [NotMapped]
-        public IFormFile? GorselDosya { get; set; }
+        public IFormFile? ReferansGorselDosya { get; set; }
     }
 }

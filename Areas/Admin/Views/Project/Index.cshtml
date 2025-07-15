@@ -1,8 +1,9 @@
-@model List<Project>
+@*@model List<Project>*@
 @{
     ViewData["Title"] = "Projeler";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+@model List<express_website.Models.ProjeClass>
 <h2>Projeler</h2>
 
 <a class="btn btn-success mb-3" href="/Admin/Project/Create">Yeni Proje Ekle</a>
@@ -18,11 +19,13 @@
     <tbody>
         @foreach (var item in Model)
         {
+            var base64Image = Convert.ToBase64String(item.ProjeGorsel ?? new byte[0]);
+            var imageSrc = $"data:image/jpeg;base64,{base64Image}";
             <tr>
-                <td><img src="@item.ImagePath" width="100" /></td>
-                <td>@item.Description</td>
+                <td><img src="@imageSrc" width="100" /></td>
+                <td>@item.ProjeAdi</td>
                 <td>
-                    <a class="btn btn-danger btn-sm" href="/Admin/Project/Delete/@item.Id">Sil</a>
+                    <a class="btn btn-danger btn-sm" href="/Admin/Project/Delete/@item.ProjeId">Sil</a>
                 </td>
             </tr>
         }
