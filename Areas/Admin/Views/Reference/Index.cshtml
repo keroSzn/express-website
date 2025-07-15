@@ -2,20 +2,31 @@
     ViewData["Title"] = "Yeni Referans Görselleri";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-@model List<string>
-
+@*@model List<string>*@
+@model List<express_website.Models.ReferansClass>
 
 <h2>Referans Görselleri</h2>
 <a href="/Admin/Reference/Create" class="btn btn-primary mb-3">Yeni Görsel Yükle</a>
 
 <div class="row">
-    @foreach (var image in Model)
+    @foreach (var referans in Model)
     {
+        var base64Image = Convert.ToBase64String(referans.ReferansGorsel ?? new byte[0]);
+        var imageSrc = $"data:image/jpeg;base64,{base64Image}";
+
         <div class="col-md-3 text-center mb-3">
-            <img src="/uploads/references/@image" class="img-fluid rounded border" />
-            <form method="post" asp-action="Delete" asp-route-fileName="@image" onsubmit="return confirm('Silmek istediğinizden emin misiniz?');">
+            <img src="@imageSrc" class="img-fluid rounded border" />
+            
+            @*<tr><td><a asp-controller="Reference" asp-action="Remove" asp-route-id="@referans.ReferansId">Sil</a></td></tr>*@
+            
+            <form asp-controller="Reference" asp-action="Remove" asp-route-id="@referans.ReferansId" onsubmit="return confirm('Bu görseli silmek istediğinizden emin misiniz?');">
+                
                 <button type="submit" class="btn btn-danger mt-2">Sil</button>
             </form>
+
+            @*<form method="post" asp-action="Delete" asp-route-id="@referans.ReferansId" onsubmit="return confirm('Silmek istediğinizden emin misiniz?');">
+                <button type="submit" class="btn btn-danger mt-2">Sil</button>
+            </form>*@
         </div>
     }
 </div>
