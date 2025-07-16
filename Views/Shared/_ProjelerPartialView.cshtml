@@ -1,0 +1,27 @@
+@model List<express_website.Models.ProjeClass>
+
+<section id="projeler" class="py-5 bg-light">
+    <div class="container section-title">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="fw-bold">PROJELERİMİZ</h2>
+            <p class="text-muted">SON PROJELERİMİZ HAKKINDA BİLGİ SAHİBİ OLUN</p>
+        </div>
+
+        <div class="row">
+            @foreach (var proje in Model)
+            {
+                var base64Image = Convert.ToBase64String(proje.ProjeGorsel ?? new byte[0]);
+                var imageSrc = $"data:image/jpeg;base64,{base64Image}";
+
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <img src="@imageSrc" class="card-img-top" alt="@proje.ProjeAdi" style="height: 250px; object-fit: cover;" />
+                        <div class="card-body">
+                            <h5 class="card-title">@proje.ProjeAdi</h5>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

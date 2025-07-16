@@ -1,35 +1,41 @@
-@model List<Blog>
+@model List<express_website.Models.BlogClass>
+
 @{
-    ViewData["Title"] = "Projeler";
+    ViewData["Title"] = "Blog Listesi";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+<h2 class="mt-3 mb-4">📚 Blog Listesi</h2>
 
+<a class="btn btn-success mb-3" asp-action="Create">➕ Yeni Blog Ekle</a>
 
-
-<h2>Blog Listesi</h2>
-<a class="btn btn-primary mb-3" href="/Admin/Blog/Create">Yeni Blog Ekle</a>
-<a class="btn btn-primary mb-3" href="/Admin/Blog/Edit">Blog Düzenle</a>
-
-
-<table class="table table-bordered">
-    <thead>
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
         <tr>
-            <th>Tarih</th>
-            <th>Başlık</th>
-            <th>İşlemler</th>
+            <th scope="col">📅 Tarih</th>
+            <th scope="col">📝 Başlık</th>
+            <th scope="col">⚙️ İşlemler</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var blog in Model)
+        @if (Model != null && Model.Any())
+        {
+            foreach (var blog in Model)
+            {
+                <tr>
+                    <td>@blog.BlogTarih.ToString("dd MMM yyyy")</td>
+                    <td>@blog.BlogBaslik</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@blog.BlogId" class="btn btn-warning btn-sm">✏️ Düzenle</a>
+                        <a asp-action="Delete" asp-route-id="@blog.BlogId" class="btn btn-danger btn-sm" onclick="return confirm('Bu blog silinsin mi?');">🗑️ Sil</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
         {
             <tr>
-                <td>@blog.PublishDate.ToString("dd MMM yyyy")</td>
-                <td>@blog.Title</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@blog.Id" class="btn btn-warning btn-sm">Düzenle</a>
-                    <a asp-action="Delete" asp-route-id="@blog.Id" class="btn btn-danger btn-sm">Sil</a>
-                </td>
+                <td colspan="3" class="text-center text-muted">Henüz blog eklenmedi.</td>
             </tr>
         }
     </tbody>

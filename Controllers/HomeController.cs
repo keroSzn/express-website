@@ -19,7 +19,13 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View(_context.Hakkimizda.ToList());
+        var viewModel = new HomePageViewModel
+        {
+            HakkimizdaList = _context.Hakkimizda.ToList(),
+            Projeler = _context.Proje.ToList()
+        };
+
+        return View(viewModel);
     }
 
     public IActionResult Privacy()

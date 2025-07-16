@@ -1,0 +1,19 @@
+@model express_website.Models.AlanClass
+@{
+    ViewData["Title"] = "Yeni Alan Ekle";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Yeni Alan Ekle</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="AlanAdi"></label>
+        <input asp-for="AlanAdi" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ModelId"></label>
+        <input asp-for="ModelId" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-success mt-3">Kaydet</button>
+</form>

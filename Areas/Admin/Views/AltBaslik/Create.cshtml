@@ -1,0 +1,24 @@
+@model express_website.Models.AltBaslikClass
+@{
+    ViewData["Title"] = "Yeni Alt Başlık";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h2>Alt Başlık Ekle</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label>Alt Başlık Adı</label>
+        <input asp-for="AltBaslikAdi" class="form-control" />
+        <span asp-validation-for="AltBaslikAdi" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Başlık Seç</label>
+        <select asp-for="BaslikId" class="form-control" asp-items="@(new SelectList(ViewBag.Basliklar, "BaslikId", "BaslikAdi"))">
+            <option value="">Seçiniz</option>
+        </select>
+        <span asp-validation-for="BaslikId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>

@@ -1,0 +1,38 @@
+@model express_website.Models.ElemanModeliClass
+@{
+    ViewData["Title"] = "Yeni Model Ekle";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var elemanlar = ViewBag.Elemanlar as List<express_website.Models.ElemanClass>;
+}
+
+<h2>Yeni Eleman Modeli Ekle</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="ElemanModeliAdi">Model Adı</label>
+        <input asp-for="ElemanModeliAdi" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FiyatBilgisi1">Fiyat Bilgisi 1</label>
+        <input asp-for="FiyatBilgisi1" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FiyatBilgisi2">Fiyat Bilgisi 2</label>
+        <input asp-for="FiyatBilgisi2" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ElemanId">Ait Olduğu Eleman</label>
+        <select asp-for="ElemanId" class="form-control">
+            <option value="">-- Seçiniz --</option>
+            @foreach (var eleman in elemanlar)
+            {
+                <option value="@eleman.ElemanId">@eleman.ElemanAdi</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Kaydet</button>
+</form>

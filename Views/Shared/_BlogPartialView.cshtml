@@ -1,0 +1,23 @@
+@model List<express_website.Models.BlogClass>
+<section id="bloglar" class="py-5 bg-light">
+    <div class="container section-title">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="fw-bold">BLOGLAR</h2>
+        </div>
+    <div class="row">
+        @foreach (var blog in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">@blog.BlogBaslik</h5>
+                        <p class="card-text text-muted" style="font-size: 0.9rem;">@blog.BlogTarih.ToString("dd MMM yyyy")</p>
+                        <p class="card-text flex-grow-1">@blog.BlogMetin?.Substring(0, Math.Min(blog.BlogMetin.Length, 120))... </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+

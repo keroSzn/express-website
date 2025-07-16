@@ -19,6 +19,7 @@ namespace express_website.Models
         public DbSet<HucreClass> Hucre { get; set; }
         public DbSet<ReferansClass> Referans { get; set; }
         public DbSet<ProjeClass> Proje { get; set; }
+        public DbSet<BlogClass> Blog { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<KategoriClass>().HasKey(x => x.KategoriId);
@@ -31,6 +32,7 @@ namespace express_website.Models
             modelBuilder.Entity<HucreClass>().HasKey(x => x.HucreId);
             modelBuilder.Entity<ReferansClass>().HasKey(x => x.ReferansId);
             modelBuilder.Entity<ProjeClass>().HasKey(x => x.ProjeId);
+            modelBuilder.Entity<BlogClass>().HasKey(x => x.BlogId);
         }
         
 

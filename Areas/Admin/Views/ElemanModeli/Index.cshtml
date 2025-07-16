@@ -1,0 +1,35 @@
+@model List<express_website.Models.ElemanModeliClass>
+@{
+    ViewData["Title"] = "Eleman Modelleri";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Eleman Modelleri</h2>
+<a class="btn btn-primary mb-3" href="/Admin/ElemanModeli/Create">Yeni Model Ekle</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Model Adı</th>
+            <th>Fiyat 1</th>
+            <th>Fiyat 2</th>
+            <th>Ait Olduğu Eleman</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var model in Model)
+        {
+            <tr>
+                <td>@(model.ElemanModeliAdi)</td>
+                <td>@(model.FiyatBilgisi1)</td>
+                <td>@(model.FiyatBilgisi2)</td>
+                <td>@(model.AitOlduguEleman?.ElemanAdi)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@(model.ElemanModeliId)" class="btn btn-warning btn-sm">Düzenle</a>
+                    <a asp-action="Delete" asp-route-id="@(model.ElemanModeliId)" class="btn btn-danger btn-sm">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,33 @@
+@model List<express_website.Models.ElemanClass>
+@{
+    ViewData["Title"] = "Elemanlar";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Elemanlar</h2>
+<a class="btn btn-primary mb-3" href="/Admin/Eleman/Create">Yeni Eleman Ekle</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Eleman Adı</th>
+            <th>Eleman Metni</th>
+            <th>Ait Olduğu Alt Başlık</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var e in Model)
+        {
+            <tr>
+                <td>@e.ElemanAdi</td>
+                <td>@e.ElemanMetin</td>
+                <td>@e.AitOlduguAltBaslik?.AltBaslikAdi</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@e.ElemanId" class="btn btn-warning btn-sm">Düzenle</a>
+                    <a asp-action="Delete" asp-route-id="@e.ElemanId" class="btn btn-danger btn-sm">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

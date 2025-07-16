@@ -1,31 +1,49 @@
 using Microsoft.AspNetCore.Mvc;
-
+using express_website.Models;
 
 namespace express_website.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class BlogController : Controller
     {
+        private AppDbContext _context;
         private static List<Blog> _blogs = new(); // geçici liste, veritabanı yerine
+
+        public BlogController(AppDbContext context)
+        {
+            _context = context;
+        }
 
         public IActionResult Index()
         {
-            return View(_blogs.OrderByDescending(x => x.PublishDate).ToList());
+            var _blogs=_context.Blog.OrderByDescending(b => b.BlogTarih).ToList();
+
+            return View(_blogs);
         }
 
         public IActionResult Create()
         {
-            return View();
+            //var newBlog = new BlogClass();
+            return View(/*newBlog*/);
         }
 
         [HttpPost]
-        public IActionResult Create(Blog blog)
+        public IActionResult Create(DateOnly tarih, string baslik, string icerik)
         {
-            if (!ModelState.IsValid)
-                return View(blog);
+            /*if (!ModelState.IsValid)
+                return View(blog);*/
 
-            blog.Id = _blogs.Count + 1;
-            _blogs.Add(blog);
+            //blog.Id = _blogs.Count + 1;
+            //_blogs.Add(blog);
+            var newBlog = new BlogClass{
+                BlogBaslik = baslik,
+                BlogMetin = icerik,
+                BlogTarih = tarih
+            };
+
+            _context.Blog.Add(newBlog);
+            _context.SaveChanges();
+            
             return RedirectToAction("Index");
         }
 

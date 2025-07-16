@@ -1,8 +1,12 @@
-﻿@{
+﻿@model express_website.Models.HomePageViewModel
+
+@{
     ViewData["Title"] = "Anasayfa";
 }
+
 <partial name="_HeroPartialView" />
 <partial name="_ClientPartialView"/>
-<partial name="_AboutUsPartialView" />
+<partial name="_AboutUsPartialView" model="Model.HakkimizdaList" />
+<partial name="_ProjelerPartialView" model="Model.Projeler" />
+<partial name="_BlogPartialView" model="Model.Blog" />
 <partial name="_ContactPartialView"/>
-

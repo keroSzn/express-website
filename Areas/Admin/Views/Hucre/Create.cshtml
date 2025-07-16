@@ -1,0 +1,28 @@
+@model express_website.Models.HucreClass
+@{
+    ViewData["Title"] = "Yeni Hücre Ekle";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var alanlar = ViewBag.Alanlar as List<express_website.Models.AlanClass>;
+}
+
+<h2>Yeni Hücre Ekle</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="HucreMetin">Hücre Metni</label>
+        <input asp-for="HucreMetin" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AlanId">Alan</label>
+        <select asp-for="AlanId" class="form-control">
+            <option value="">-- Seçiniz --</option>
+            @foreach (var alan in alanlar)
+            {
+                <option value="@alan.AlanId">@alan.AlanAdi</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Kaydet</button>
+</form>
