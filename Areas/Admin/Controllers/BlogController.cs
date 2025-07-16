@@ -1,13 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using express_website.Models;
+using System.Linq;
 
 namespace express_website.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class BlogController : Controller
     {
-        private AppDbContext _context;
-        private static List<Blog> _blogs = new(); // geçici liste, veritabanı yerine
+        private readonly AppDbContext _context;
 
         public BlogController(AppDbContext context)
         {
@@ -16,67 +16,67 @@ namespace express_website.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var _blogs=_context.Blog.OrderByDescending(b => b.BlogTarih).ToList();
-
-            return View(_blogs);
+            var blogs = _context.Blog.OrderByDescending(b => b.BlogTarih).ToList();
+            return View(blogs);
         }
 
         public IActionResult Create()
         {
-            //var newBlog = new BlogClass();
-            return View(/*newBlog*/);
+            return View();
         }
 
         [HttpPost]
-        public IActionResult Create(DateOnly tarih, string baslik, string icerik)
+        public IActionResult Create(DateOnly BlogTarih, string BlogBaslik, string BlogMetin)
         {
-            /*if (!ModelState.IsValid)
-                return View(blog);*/
-
-            //blog.Id = _blogs.Count + 1;
-            //_blogs.Add(blog);
-            var newBlog = new BlogClass{
-                BlogBaslik = baslik,
-                BlogMetin = icerik,
-                BlogTarih = tarih
+            var newBlog = new BlogClass
+            {
+                BlogTarih = BlogTarih,
+                BlogBaslik = BlogBaslik,
+                BlogMetin = BlogMetin
             };
 
             _context.Blog.Add(newBlog);
             _context.SaveChanges();
-            
+
             return RedirectToAction("Index");
         }
 
         public IActionResult Edit(int id)
         {
-            var blog = _blogs.FirstOrDefault(x => x.Id == id);
+            var blog = _context.Blog.FirstOrDefault(b => b.BlogId == id);
             if (blog == null)
                 return NotFound();
+
             return View(blog);
         }
 
         [HttpPost]
-        public IActionResult Edit(Blog updatedBlog)
+        public IActionResult Edit(BlogClass updatedBlog)
         {
             if (!ModelState.IsValid)
                 return View(updatedBlog);
 
-            var blog = _blogs.FirstOrDefault(x => x.Id == updatedBlog.Id);
+            var blog = _context.Blog.FirstOrDefault(b => b.BlogId == updatedBlog.BlogId);
             if (blog == null)
                 return NotFound();
 
-            blog.Title = updatedBlog.Title;
-            blog.Content = updatedBlog.Content;
-            blog.PublishDate = updatedBlog.PublishDate;
+            blog.BlogTarih = updatedBlog.BlogTarih;
+            blog.BlogBaslik = updatedBlog.BlogBaslik;
+            blog.BlogMetin = updatedBlog.BlogMetin;
+
+            _context.SaveChanges();
 
             return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int id)
         {
-            var blog = _blogs.FirstOrDefault(x => x.Id == id);
-            if (blog != null)
-                _blogs.Remove(blog);
+            var blog = _context.Blog.FirstOrDefault(b => b.BlogId == id);
+            if (blog == null)
+                return NotFound();
+
+            _context.Blog.Remove(blog);
+            _context.SaveChanges();
 
             return RedirectToAction("Index");
         }
