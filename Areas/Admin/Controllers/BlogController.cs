@@ -26,13 +26,13 @@ namespace express_website.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(DateOnly BlogTarih, string BlogBaslik, string BlogMetin)
+        public IActionResult Create(DateOnly tarih, string baslik, string icerik)
         {
             var newBlog = new BlogClass
             {
-                BlogTarih = BlogTarih,
-                BlogBaslik = BlogBaslik,
-                BlogMetin = BlogMetin
+                BlogTarih = tarih,
+                BlogBaslik = baslik,
+                BlogMetin = icerik
             };
 
             _context.Blog.Add(newBlog);
