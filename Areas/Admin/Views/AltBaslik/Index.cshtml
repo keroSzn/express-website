@@ -21,7 +21,7 @@
             <tr>
                 <td>@item.AltBaslikId</td>
                 <td>@item.AltBaslikAdi</td>
-                <td>@item.AitOlduguBaslik?.BaslikAdi</td>
+                <td>@item.Baslik?.BaslikAdi</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.AltBaslikId" class="btn btn-sm btn-primary">Düzenle</a>
                     <a asp-action="Delete" asp-route-id="@item.AltBaslikId" class="btn btn-sm btn-danger">Sil</a>

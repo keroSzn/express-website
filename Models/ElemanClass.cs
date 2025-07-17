@@ -10,7 +10,7 @@ namespace express_website.Models
 
         public int AltBaslikId { get; set; }
 
-        public AltBaslikClass? AitOlduguAltBaslik { get; set; }
+        public AltBaslikClass? AltBaslik { get; set; }
         
         public List<ElemanModeliClass>? ElemanModeliListe { get; set; }
 

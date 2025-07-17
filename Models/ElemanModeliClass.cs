@@ -12,7 +12,7 @@ namespace express_website.Models
 
         public int ElemanId { get; set; }
 
-        public ElemanClass? AitOlduguEleman { get; set; }
+        public ElemanClass? Eleman { get; set; }
         
         public List<AlanClass>? AlanListe { get; set; }
 

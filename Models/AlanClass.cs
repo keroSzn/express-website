@@ -8,7 +8,7 @@ namespace express_website.Models
 
         public int ModelId { get; set; }
 
-        public ElemanModeliClass? AitOlduguElemanModeli { get; set; }
+        public ElemanModeliClass? ElemanModeli { get; set; }
         
         public List<HucreClass>? HucreListe { get; set; }
 

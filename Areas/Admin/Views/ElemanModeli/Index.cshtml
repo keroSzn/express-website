@@ -24,7 +24,7 @@
                 <td>@(model.ElemanModeliAdi)</td>
                 <td>@(model.FiyatBilgisi1)</td>
                 <td>@(model.FiyatBilgisi2)</td>
-                <td>@(model.AitOlduguEleman?.ElemanAdi)</td>
+                <td>@(model.Eleman?.ElemanAdi)</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@(model.ElemanModeliId)" class="btn btn-warning btn-sm">Düzenle</a>
                     <a asp-action="Delete" asp-route-id="@(model.ElemanModeliId)" class="btn btn-danger btn-sm">Sil</a>

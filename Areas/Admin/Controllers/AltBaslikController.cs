@@ -17,7 +17,7 @@ namespace express_website.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var altbasliklar = _context.AltBaslik
-                .Include(x => x.AitOlduguBaslik)
+                .Include(x => x.Baslik)
                 .OrderByDescending(x => x.AltBaslikId)
                 .ToList();
             return View(altbasliklar);

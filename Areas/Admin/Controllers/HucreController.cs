@@ -17,7 +17,7 @@ namespace express_website.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var hucreler = _context.Hucre
-                .Include(h => h.AitOlduguAlan)
+                .Include(h => h.Alan)
                 .ToList();
             return View(hucreler);
         }

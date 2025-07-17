@@ -25,7 +25,7 @@
             <tr>
                 <td>@item.BaslikId</td>
                 <td>@item.BaslikAdi</td>
-                <td>@item.KategoriClass?.KategoriAdi</td>
+                <td>@item.Kategori?.KategoriAdi</td>
                 <td>
                     <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@item.BaslikId">Düzenle</a>
                     <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.BaslikId">Sil</a>

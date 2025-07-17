@@ -17,7 +17,7 @@ namespace express_website.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var model = _context.ElemanModeli
-                .Include(em => em.AitOlduguEleman)
+                .Include(em => em.Eleman)
                 .ToList();
             return View(model);
         }

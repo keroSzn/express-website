@@ -8,7 +8,7 @@ namespace express_website.Models
 
         public int AlanId { get; set; }
 
-        public AlanClass? AitOlduguAlan { get; set; }
+        public AlanClass? Alan { get; set; }
         
     }
 }

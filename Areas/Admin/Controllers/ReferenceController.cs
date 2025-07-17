@@ -93,7 +93,7 @@ namespace express_website.Areas.Admin.Controllers
 
         /*[HttpPost]
         [ValidateAntiForgeryToken]*/
-        public IActionResult Delete(int id) 
+        /*public IActionResult Delete(int id)
         {
             var silreferans = _context.Referans.Find(id);
             if (silreferans != null)
@@ -103,7 +103,23 @@ namespace express_website.Areas.Admin.Controllers
             }
 
             return RedirectToAction("Index");
+        }*/
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var silreferans = _context.Referans.Find(id);
+            Console.WriteLine("Gelen ID: " + id);
+            if (silreferans != null)
+            {
+                _context.Referans.Remove(silreferans);
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
         }
+
 
     }
 }

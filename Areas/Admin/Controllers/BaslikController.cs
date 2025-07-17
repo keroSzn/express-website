@@ -20,7 +20,7 @@ namespace express_website.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var basliklar = await _context.Baslik
-                .Include(b => b.KategoriClass)
+                .Include(b => b.Kategori)
                 .ToListAsync();
             return View(basliklar);
         }
@@ -98,7 +98,7 @@ namespace express_website.Areas.Admin.Controllers
         {
             if (id == null) return NotFound();
             var baslik = await _context.Baslik
-                .Include(b => b.KategoriClass)
+                .Include(b => b.Kategori)
                 .FirstOrDefaultAsync(m => m.BaslikId == id);
             if (baslik == null) return NotFound();
             return View(baslik);

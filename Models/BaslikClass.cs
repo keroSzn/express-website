@@ -8,7 +8,7 @@ namespace express_website.Models
 
         public int KategoriId { get; set; }
 
-        public KategoriClass? KategoriClass { get; set; }
+        public KategoriClass? Kategori { get; set; }
         
         public List<AltBaslikClass>? AltBaslikListe { get; set; }
 

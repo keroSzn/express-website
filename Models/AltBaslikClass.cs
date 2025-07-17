@@ -8,7 +8,7 @@ namespace express_website.Models
 
         public int BaslikId { get; set; }
 
-        public BaslikClass? AitOlduguBaslik { get; set; }
+        public BaslikClass? Baslik { get; set; }
         
         public List<ElemanClass>? ElemanListe { get; set; }
 

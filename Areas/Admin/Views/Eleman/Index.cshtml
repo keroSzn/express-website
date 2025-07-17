@@ -22,7 +22,7 @@
             <tr>
                 <td>@e.ElemanAdi</td>
                 <td>@e.ElemanMetin</td>
-                <td>@e.AitOlduguAltBaslik?.AltBaslikAdi</td>
+                <td>@e.AltBaslik?.AltBaslikAdi</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@e.ElemanId" class="btn btn-warning btn-sm">Düzenle</a>
                     <a asp-action="Delete" asp-route-id="@e.ElemanId" class="btn btn-danger btn-sm">Sil</a>
