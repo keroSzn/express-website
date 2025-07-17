@@ -1,3 +1,4 @@
+@model List<express_website.Models.ReferansClass>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,15 +74,17 @@
         </script>
 
         <div class="swiper-wrapper">
-          <div class="swiper-slide"><img src="img/b149786049567a74834126977616.jpeg" alt=""></div>
-          <div class="swiper-slide"><img src="img/b165209998067a7479838011030.jpeg" alt=""></div>
-          <div class="swiper-slide"><img src="img/b165210071067a74237435539343.jpeg" alt=""></div>
-          <div class="swiper-slide"><img src="img/b165184093767a7488495546499.png" alt=""></div>
-          <div class="swiper-slide"><img src="img/b149785956667a74817441264486.png" alt=""></div>
-          <div class="swiper-slide"><img src="img/b149786049667a74961610142650.jpeg" alt=""></div>
-          <div class="swiper-slide"><img src="img/b165063015767a7488723436234.png" alt=""></div>
-          <div class="swiper-slide"><img src="img/b165208169567a74374289367140.png" alt=""></div>
-          <div class="swiper-slide"><img src="img/b165208026867a7433110221963.png" alt=""></div>
+          @foreach (var item in Model)
+        {
+            if (item.ReferansGorsel != null)
+            {
+                var base64 = Convert.ToBase64String(item.ReferansGorsel);
+                var imgSrc = $"data:image/jpeg;base64,{base64}";
+                <div class="swiper-slide">
+                    <img src="@imgSrc" alt="Referans">
+                </div>
+            }
+        }
 
         </div>
 
