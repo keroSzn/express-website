@@ -4,6 +4,11 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+@foreach (var item in ViewBag.KategoriList as List<SelectListItem>)
+{
+    <p>@item.Text</p>
+}
+
 <h2>Yeni Başlık Ekle</h2>
 
 <form asp-action="Create" method="post">
@@ -15,9 +20,15 @@
 
     <div class="form-group">
         <label asp-for="KategoriId" class="control-label">Kategori</label>
-        <select asp-for="KategoriId" asp-items="@(new SelectList(ViewBag.KategoriList, "Value", "Text"))" class="form-control">
+        @*<select asp-for="KategoriId" asp-items="@(new SelectList(ViewBag.KategoriList, "Value", "Text"))" class="form-control">*@
+        <select asp-for="KategoriId" asp-items="@(ViewBag.KategoriList)" class="form-control">
             <option value="">Kategori Seçiniz</option>
         </select>
+        @*<select asp-for="KategoriId" class="form-control">
+            <option value="1">Deneme Kategori 1</option>
+            <option value="2">Deneme Kategori 2</option>
+        </select>*@
+
         <span asp-validation-for="KategoriId" class="text-danger"></span>
     </div>
 

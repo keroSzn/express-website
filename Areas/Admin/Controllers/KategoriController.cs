@@ -28,19 +28,24 @@ namespace express_website.Areas.Admin.Controllers
         /* ───────────── CREATE ───────────── */
         public IActionResult Create()
         {
+            //var newKategori = new KategoriClass();
             return View();
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(KategoriClass kategori)
+        
+        [HttpPost]
+        public IActionResult Create(string kategoriAdi, string kategoriMetin)
         {
-            if (ModelState.IsValid)
-    {
-        _context.Kategori.Add(kategori);
-        await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
-    }
-    return View(kategori);
+            var newKategori = new KategoriClass
+            {
+                KategoriAdi = kategoriAdi,
+                KategoriMetin = kategoriMetin
+            };
+
+            _context.Kategori.Add(newKategori);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         /* ───────────── EDIT ───────────── */

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("express-website")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f412bc559451c26724eab3bccc2c24d1c338f2be")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ea0fc5f2d1b5e697f6ea1aaf8024ff47c75d91e8")]
 [assembly: System.Reflection.AssemblyProductAttribute("express-website")]
 [assembly: System.Reflection.AssemblyTitleAttribute("express-website")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

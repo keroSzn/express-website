@@ -1,4 +1,3 @@
-@model express_website.Models.KategoriClass
 @{
     ViewData["Title"] = "Yeni Kategori Ekle";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -6,18 +5,16 @@
 
 <h2>Yeni Kategori Ekle</h2>
 
-<form asp-action="Create" method="post">
-    <div class="form-group">
-        <label asp-for="KategoriAdi" class="control-label"></label>
-        <input asp-for="KategoriAdi" class="form-control" />
-        <span asp-validation-for="KategoriAdi" class="text-danger"></span>
-    </div>
 
-    <div class="form-group">
-        <label asp-for="KategoriMetin" class="control-label"></label>
-        <textarea asp-for="KategoriMetin" class="form-control"></textarea>
-        <span asp-validation-for="KategoriMetin" class="text-danger"></span>
-    </div>
 
-    <button type="submit" class="btn btn-primary">Kaydet</button>
+<form asp-area="Admin" asp-controller="Kategori" asp-action="Create" method="post">
+    <div class="mb-3">
+        <label for="kategoriAdi" class="form-label">Kategori Adı</label>
+        <input type="text" name="kategoriAdi" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label for="kategoriMetin" class="form-label">Kategori Metni</label>
+        <textarea name="kategoriMetin" class="form-control" rows="5" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-success">Kaydet</button>
 </form>
