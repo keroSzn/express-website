@@ -1,4 +1,4 @@
-@*@{
+@{
     ViewData["Title"] = "Yeni Referans Görselleri";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
@@ -25,85 +25,13 @@
                 
                 <button type="submit" class="btn btn-danger mt-2">Sil</button>
             </form>*@
-
-            @*<form method="post" asp-action="Delete" asp-route-id="@referans.ReferansId" onsubmit="return confirm('Silmek istediğinizden emin misiniz?');">
-                <button type="submit" class="btn btn-danger mt-2">Sil</button>
+              
+            <form method="post" " onsubmit="return confirm('Silmek istediğinizden emin misiniz?');">
+                <input type="hidden" name="id" value="@referans.ReferansId" />
+                @*<button type="submit" class="btn btn-primary">Kaydet</button>*@
+                <button type="submit"  class="btn btn-danger mt-2">Sil</button>
             </form>
         </div>
     }
 </div>
-*@
 
-@{
-    ViewData["Title"] = "Yeni Referans Görselleri";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
-}
-
-@model List<express_website.Models.ReferansClass>
-
-<h2>Referans Görselleri</h2>
-<a href="/Admin/Reference/Create" class="btn btn-primary mb-3">Yeni Görsel Yükle</a>
-
-<div class="row">
-    @*@foreach (var referans in Model)
-    {
-        var base64Image = Convert.ToBase64String(referans.ReferansGorsel ?? new byte[0]);
-        var imageSrc = $"data:image/jpeg;base64,{base64Image}";
-
-        @*<div class="col-md-3 text-center mb-3">
-            <img src="@imageSrc" class="img-fluid rounded border" />
-
-            <form asp-area="Admin" asp-controller="Reference" asp-action="DeleteConfirmed" method="post" style="display:inline;">
-                <input type="hidden" name="id" value="@referans.ReferansId" />
-                @Html.AntiForgeryToken()
-                <button type="submit" class="btn btn-link text-danger p-0 mt-2" style="text-decoration: underline;">Sil</button>
-            </form>
-        </div>*@ @*
-        <div class="col-md-3 text-center mb-3">
-            <img src="@imageSrc" class="img-fluid rounded border" />
-            
-            <form asp-area="Admin" asp-controller="Reference" asp-action="DeleteConfirmed" method="post" class="mt-2">
-                <input type="hidden" name="id" value="@referans.ReferansId" />
-                <button type="submit" class="btn btn-danger">Sil</button>
-            </form>
-        </div>
-
-    }*@
-    @foreach (var referans in Model)
-    {
-        var base64Image = Convert.ToBase64String(referans.ReferansGorsel ?? new byte[0]);
-        var imageSrc = $"data:image/jpeg;base64,{base64Image}";
-
-        <div class="col-md-3 text-center mb-3">
-            <img src="@imageSrc" class="img-fluid rounded border" />
-
-            <!-- Sil butonu -->
-            <button type="button" class="btn btn-danger mt-2" data-bs-toggle="modal" data-bs-target="#deleteModal@referans.ReferansId">
-                Sil
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="deleteModal@referans.ReferansId" tabindex="-1" aria-labelledby="modalLabel@referans.ReferansId" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <form asp-area="Admin" asp-controller="Reference" asp-action="DeleteConfirmed" method="post">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modalLabel@referans.ReferansId">Silme Onayı</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
-                            </div>
-                            <div class="modal-body">
-                                Bu görseli silmek istediğinizden emin misiniz?
-                                <input type="hidden" name="id" value="@referans.ReferansId" />
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
-                                <button type="submit" class="btn btn-danger">Sil</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
-
-</div>
