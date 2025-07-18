@@ -1,40 +1,72 @@
-@model express_website.Models.BaslikClass
+@*@model express_website.Models.BaslikClass*@
 @{
     ViewData["Title"] = "Yeni Başlık Ekle";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+@model List<express_website.Models.KategoriClass>
 
-@foreach (var item in ViewBag.KategoriList as List<SelectListItem>)
+@foreach (var item in Model)
 {
-    <p>@item.Text</p>
+    <p>@item.KategoriAdi</p>
 }
 
 <h2>Yeni Başlık Ekle</h2>
 
-<form asp-action="Create" method="post">
+<form asp-area="Admin" asp-controller="Baslik" asp-action="Create" method="post">
+    @*<div class="form-group">
+        <label asp-for="baslikAdi" class="control-label"></label>
+        <input type="text" asp-for="baslikAdi" class="form-control" />
+        @*<span asp-validation-for="baslikAdi" class="text-danger"></span>
+    </div>*@
+    <div class="mb-3">
+        <label for="baslikAdi" class="form-label">Başlık Adı</label>
+        <input type="text" name="baslikAdi" class="form-control" required />
+    </div>
     <div class="form-group">
-        <label asp-for="BaslikAdi" class="control-label"></label>
-        <input asp-for="BaslikAdi" class="form-control" />
-        <span asp-validation-for="BaslikAdi" class="text-danger"></span>
+        <label for="kategoriId" class="control-label">Kategori</label>
+        <select type="int" name="kategoriId" class="form-control">
+            @*<option value="">Kategori Seçiniz</option>*@
+            @foreach (var item in Model)
+            {
+                <option value="@item.KategoriId">@item.KategoriAdi</option>
+
+            }
+            
+        </select>
+        <span asp-validation-for="kategoriId" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="KategoriId" class="control-label">Kategori</label>
-        @*<select asp-for="KategoriId" asp-items="@(new SelectList(ViewBag.KategoriList, "Value", "Text"))" class="form-control">*@
-        <select asp-for="KategoriId" asp-items="@(ViewBag.KategoriList)" class="form-control">
-            <option value="">Kategori Seçiniz</option>
+    @*<div class="form-group">
+        <label asp-for="kategoriId" class="control-label">Kategori</label>
+        @*<select asp-for="KategoriId" asp-items="@Model" class="form-control">
+        <select asp-for="kategoriId" asp-items="@Model" class="form-control">
+            @*<option value="">Kategori Seçiniz</option>
+            @foreach (var item in Model)
+            {
+                <option value="@item.KategoriId">@item.KategoriAdi</option>
+
+            }
+            
         </select>
         @*<select asp-for="KategoriId" class="form-control">
             <option value="1">Deneme Kategori 1</option>
             <option value="2">Deneme Kategori 2</option>
-        </select>*@
+        </select>
 
-        <span asp-validation-for="KategoriId" class="text-danger"></span>
-    </div>
+        <span asp-validation-for="kategoriId" class="text-danger"></span>
+    </div>*@
+
+    @*<ul class="list-group">
+        @foreach (var kategori in ViewBag.KategoriList)
+        {
+            <li class="list-group-item">
+                <input type="radio" name="KategoriId" value="@kategori.Value" id="kategori_@kategori.Value" />
+                <label for="kategori_@kategori.Value">@kategori.Text</label>
+            </li>
+        }
+    </ul>*@
+
 
     <button type="submit" class="btn btn-primary">Kaydet</button>
 </form>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

@@ -28,32 +28,58 @@ namespace express_website.Areas.Admin.Controllers
         /* ───────────── CREATE ───────────── */
         public IActionResult Create()
         {
-            ViewBag.KategoriList = _context.Kategori
+            /*ViewBag.KategoriList = _context.Kategori
                 .Select(k => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
                 {
                     Value = k.KategoriId.ToString(),
                     Text = k.KategoriAdi
                 }).ToList();
-            return View();
+            return View();*/
+
+            //var KategoriList = new List<KategoriClass>();
+
+            return View(_context.Kategori.ToList());
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(BaslikClass baslik)
+        /*[HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(string baslikAdi, int kategoriId)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Baslik.Add(baslik);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+            
+                var newBaslik = new BaslikClass
+                {
+                    BaslikAdi = baslikAdi,
+                    KategoriId = kategoriId,
+                    
+                };
 
-            ViewBag.KategoriList = _context.Kategori
+                _context.Baslik.Add(newBaslik);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            
+            
+            /*ViewBag.KategoriList = _context.Kategori
                 .Select(k => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
                 {
                     Value = k.KategoriId.ToString(),
                     Text = k.KategoriAdi
                 }).ToList();
-            return View(baslik);
+            return View(newBaslik);
+        }*/
+
+        [HttpPost]
+        public IActionResult Create(string baslikAdi, int kategoriId)
+        {
+            Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+kategoriId);
+            var newBaslik = new BaslikClass
+            {
+                BaslikAdi = baslikAdi,
+                KategoriId = kategoriId,
+                
+            };
+
+            _context.Baslik.Add(newBaslik);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         /* ───────────── EDIT ───────────── */
