@@ -1,3 +1,4 @@
+@model express_website.Models.BlogClass
 @{
     ViewData["Title"] = "Blog Düzenle";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -5,22 +6,33 @@
 
 
 <h2>Blog Düzenle</h2>
+<h3>@Model.BlogId</h3>
 
-<form asp-action="Edit" method="post">
+<form asp-area="Admin" asp-controller="Blog" asp-action="Edit" method="post">
+    <input type="hidden" name="BlogId" value=@Model.BlogId />
+    @*<input type="hidden" name="id" value="@referans.ReferansId" />*@
+    @*<h3>@TempData["editBlogId"]</h3>
+    @TempData["editBlogIdYedek"]=@TempData["editBlogId"]
+    <h3>@TempData["editBlogIdYedek"]</h3>*@
+
     <div class="mb-3">
-        <label asp-for="PublishDate" class="form-label">Tarih</label>
-        <input asp-for="PublishDate" class="form-control" type="date" />
-        <span asp-validation-for="PublishDate" class="text-danger"></span>
+        <label asp-for="@Model.BlogTarih" class="form-label">Tarih</label>
+        
+        <input type="date" name="BlogTarih" value="@Model.BlogTarih.ToString("yyyy-MM-dd")" class="form-control" required /></input>
+        
     </div>
+
     <div class="mb-3">
-        <label asp-for="Title" class="form-label">Başlık</label>
-        <input asp-for="Title" class="form-control" />
-        <span asp-validation-for="Title" class="text-danger"></span>
+        <label asp-for="@Model.BlogBaslik" class="form-label">Başlık</label>
+        <input type="text" name="BlogBaslik" value="@Model.BlogBaslik"  class="form-control" required />
+        
     </div>
+
     <div class="mb-3">
-        <label asp-for="Content" class="form-label">İçerik</label>
-        <textarea asp-for="Content" class="form-control" rows="5"></textarea>
-        <span asp-validation-for="Content" class="text-danger"></span>
+        <label asp-for="@Model.BlogMetin" class="form-label">İçerik</label>
+        <textarea name="BlogMetin" class="form-control" rows="5" required>@Model.BlogMetin</textarea>
+        
     </div>
+
     <button type="submit" class="btn btn-success">Kaydet</button>
 </form>

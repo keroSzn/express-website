@@ -20,6 +20,43 @@ namespace express_website.Areas.Admin.Controllers
             return View(blogs);
         }
 
+        /*[HttpPost]
+        public IActionResult Index(int id, int komut)
+        {
+            if (komut == 0)
+            {
+                //silme
+                var silblog = _context.Blog.Find(id);
+                if (silblog != null)
+                {
+                    _context.Blog.Remove(silblog);
+                    _context.SaveChanges();
+                }
+
+                return RedirectToAction("Index");
+            }
+            if (komut == 1)
+            {
+                //düzenleme
+                var Editblog = _context.Blog.Find(id);
+                if (Editblog != null)
+                {
+                    /*_context.Blog.Update(editblog);
+                    _context.SaveChanges();*/
+                    /*return View("Edit", Editblog);
+                }
+            }
+            Console.WriteLine("BBBBBBBBBBBB" + id+ "CCCCCCCCCCCC" +komut);
+            /*var silreferans = _context.Referans.Find(id);
+            if (silreferans != null)
+            {
+                _context.Referans.Remove(silreferans);
+                _context.SaveChanges();
+            }*/
+
+            /*return RedirectToAction("Index");
+        }*/
+
         public IActionResult Create()
         {
             return View();
@@ -41,17 +78,42 @@ namespace express_website.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int blogId)
         {
-            var blog = _context.Blog.FirstOrDefault(b => b.BlogId == id);
-            if (blog == null)
-                return NotFound();
+            var Editblog = _context.Blog.Find(blogId);
+            
+                if (Editblog != null)
+            {
+                /*_context.Blog.Update(editblog);
+                _context.SaveChanges();*/
 
-            return View(blog);
+
+                return View(Editblog);
+            }
+            return View();
         }
 
+        
+
         [HttpPost]
-        public IActionResult Edit(BlogClass updatedBlog)
+        public IActionResult Edit(BlogClass blog)
+        {
+              /*
+              int blogId, DateOnly blogTarih, string blogBaslik, string blogMetin
+              */  
+            
+            _context.Blog.Update(blog);
+            _context.SaveChanges();
+            /*var blog = _context.Blog.Find(blogId);
+            if (blog == null)
+                return NotFound();
+*/
+            return RedirectToAction("Index");
+        }
+
+        /*[HttpPost]
+        
+        public IActionResult EditApprove(BlogClass updatedBlog)
         {
             if (!ModelState.IsValid)
                 return View(updatedBlog);
@@ -67,9 +129,9 @@ namespace express_website.Areas.Admin.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("Index");
-        }
+        }*@
 
-        public IActionResult Delete(int id)
+        @*public IActionResult Delete(int id)
         {
             var blog = _context.Blog.FirstOrDefault(b => b.BlogId == id);
             if (blog == null)
@@ -79,6 +141,6 @@ namespace express_website.Areas.Admin.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("Index");
-        }
+        }*/
     }
 }

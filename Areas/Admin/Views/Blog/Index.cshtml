@@ -26,8 +26,42 @@
                     <td>@blog.BlogTarih.ToString("dd MMM yyyy")</td>
                     <td>@blog.BlogBaslik</td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@blog.BlogId" class="btn btn-warning btn-sm">✏️ Düzenle</a>
-                        <a asp-action="Delete" asp-route-id="@blog.BlogId" class="btn btn-danger btn-sm" onclick="return confirm('Bu blog silinsin mi?');">🗑️ Sil</a>
+                        
+                       
+                                                
+                        
+                        @*<form method="post"  onsubmit="return confirm('Düzenlemek istediğinizden emin misiniz?');">
+                            <h2>@blog.BlogId</h2>
+                            <input type="hidden" name="id" value=@blog.BlogId />
+                            <input type="hidden" name="komut" value=1 />
+                            
+                            <button type="submit"  class="btn btn-warning btn-sm">✏️ Düzenle</button>
+                        </form>*@
+
+                        @*<form href="Edit" method="post">
+                            <h2>@blog.BlogId</h2>
+                            <input type="hidden" name="blogId" value=@blog.BlogId />
+                            <input type="hidden" name="komut" value=1 />
+                            
+                            <button type="submit"  class="btn btn-warning btn-sm">✏️ Düzenle</button>
+                        </form>*@
+
+                        <a href="Blog/Edit?blogId=@blog.BlogId"><button type="submit"  class="btn btn-warning btn-sm">✏️ Düzenle</button></a>
+                        
+                        <form method="post"  onsubmit="return confirm('Silmek istediğinizden emin misiniz?');">
+                            <input type="hidden" name="id" value=@blog.BlogId />
+                            <input type="hidden" name="komut" value=0 />
+                            @*<button type="submit" class="btn btn-primary">Kaydet</button>*@
+                            <button type="submit"  class="btn btn-danger mt-2">🗑️ Sil</button>
+                        </form>
+
+                        @*Son yazılan
+                        <a href=/Admin/Blog/Edit onclick="UpdateFunction(this)" class="btn btn-warning btn-sm" data-date="@blog.BlogTarih">✏️ Düzenle</a>*@
+                        
+                        
+                        @*<a href="/Admin/Blog/Edit" asp-action="Edit" name="id"" class="btn btn-warning btn-sm">✏️ Düzenle</a>*@
+                        
+                        @*<a asp-action="Delete" asp-route-id="@blog.BlogId" class="btn btn-danger btn-sm" onclick="return confirm('Bu blog silinsin mi?');">🗑️ Sil</a>*@
                     </td>
                 </tr>
             }
@@ -40,3 +74,12 @@
         }
     </tbody>
 </table>
+@*Son yazılan
+<script>
+    function UpdateFunction(button)
+    {
+       var date= button.getAttribute("data-date");
+
+       //ajax 
+    }
+</script>*@

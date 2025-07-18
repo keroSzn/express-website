@@ -20,6 +20,7 @@ namespace express_website.Models
         public DbSet<ReferansClass> Referans { get; set; }
         public DbSet<ProjeClass> Proje { get; set; }
         public DbSet<BlogClass> Blog { get; set; }
+        public DbSet<IletisimClass> Iletisim { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<KategoriClass>().HasKey(x => x.KategoriId);
@@ -33,6 +34,7 @@ namespace express_website.Models
             modelBuilder.Entity<ReferansClass>().HasKey(x => x.ReferansId);
             modelBuilder.Entity<ProjeClass>().HasKey(x => x.ProjeId);
             modelBuilder.Entity<BlogClass>().HasKey(x => x.BlogId);
+            modelBuilder.Entity<IletisimClass>().HasKey(x => x.IletisimId);
         }
         
 
