@@ -1,0 +1,38 @@
+@model List<express_website.Models.AlanClass>
+@{
+    ViewData["Title"] = "Hücre Düzenle";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<h2>Hücre Düzenle</h2>
+<h3>@ViewBag.EditHucre.HucreId</h3>
+
+<form asp-area="Admin" asp-controller="Hucre" asp-action="Edit" method="post">
+    <input type="hidden" name="HucreId" value=@ViewBag.EditHucre.HucreId />
+    
+
+
+    <div class="mb-3">
+        <label asp-for="@ViewBag.EditHucre.HucreMetin" class="form-label">Hücre Metni</label>
+        <textarea name="HucreMetin" value="@ViewBag.EditHucre.HucreMetin"  class="form-control" required /></textarea>
+        
+    </div>
+
+
+
+    <div class="form-group">
+        <label asp-for="AlanId" class="control-label">Ait Olduğu Alan</label>
+        <select type="int" name="AlanId" class="form-control">
+            @foreach (var item in Model)
+            {
+                <option value="@item.AlanId">@item.AlanAdi</option>
+
+            }
+            
+        </select>
+        <span asp-validation-for="AlanId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Kaydet</button>
+</form>

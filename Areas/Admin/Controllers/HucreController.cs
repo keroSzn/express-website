@@ -16,69 +16,83 @@ namespace express_website.Areas.Admin.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        /* ───────────── LIST ───────────── */
+        public async Task<IActionResult> Index()
         {
-            var hucreler = _context.Hucre
-                .Include(h => h.Alan)
-                .ToList();
+            var hucreler = await _context.Hucre
+                .Include(b => b.Alan)
+                .ToListAsync();
             return View(hucreler);
         }
 
-        public IActionResult Create()
-        {
-            ViewBag.Alanlar = _context.Alan.ToList();
-            return View();
-        }
-
         [HttpPost]
-        public IActionResult Create(HucreClass hucre)
+        public IActionResult Index(int id, int komut)
         {
-            if (!ModelState.IsValid)
+            if (komut == 1)
             {
-                ViewBag.Alanlar = _context.Alan.ToList();
-                return View(hucre);
+                //silme
+                var silHucre = _context.Hucre.Find(id);
+                if (silHucre != null)
+                {
+                    _context.Hucre.Remove(silHucre);
+                    _context.SaveChanges();
+                }
+
+                return RedirectToAction("Index");
             }
 
-            _context.Hucre.Add(hucre);
-            _context.SaveChanges();
-
+            //Console.WriteLine("BBBBBBBBBBBB" + id + "CCCCCCCCCCCC" + komut);
             return RedirectToAction("Index");
         }
+
+        /* ───────────── CREATE ───────────── */
+        public IActionResult Create()
+        {
+
+
+            return View(_context.Alan.ToList());
+        }
+
+
+
+        [HttpPost]
+        public IActionResult Create(string hucreMetin, int alanId)
+        {
+            //Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + kategoriId);
+            var newHucre = new HucreClass
+            {
+                HucreMetin = hucreMetin,
+                AlanId = alanId,
+
+            };
+
+            _context.Hucre.Add(newHucre);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        /* ───────────── EDIT ───────────── */
 
         public IActionResult Edit(int id)
         {
-            var hucre = _context.Hucre.FirstOrDefault(h => h.HucreId == id);
-            if (hucre == null) return NotFound();
+            var EditHucre = _context.Hucre.Find(id);
 
-            ViewBag.Alanlar = _context.Alan.ToList();
-            return View(hucre);
+            if (EditHucre != null)
+            {
+                ViewBag.EditHucre = EditHucre;
+                return View(_context.Alan.ToList());
+            }
+            return View();
         }
+
+
 
         [HttpPost]
-        public IActionResult Edit(HucreClass updated)
+        public IActionResult Edit(HucreClass EditHucre)
         {
-            if (!ModelState.IsValid)
-            {
-                ViewBag.Alanlar = _context.Alan.ToList();
-                return View(updated);
-            }
 
-            var hucre = _context.Hucre.FirstOrDefault(h => h.HucreId == updated.HucreId);
-            if (hucre == null) return NotFound();
 
-            hucre.HucreMetin = updated.HucreMetin;
-            hucre.AlanId = updated.AlanId;
-
-            _context.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult Delete(int id)
-        {
-            var hucre = _context.Hucre.FirstOrDefault(h => h.HucreId == id);
-            if (hucre == null) return NotFound();
-
-            _context.Hucre.Remove(hucre);
+            _context.Hucre.Update(EditHucre);
             _context.SaveChanges();
 
             return RedirectToAction("Index");

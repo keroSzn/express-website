@@ -1,24 +1,38 @@
-@model express_website.Models.AltBaslikClass
 @{
-    ViewData["Title"] = "Yeni Alt Başlık";
+    ViewData["Title"] = "Yeni Alt Başlık Ekle";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<h2>Alt Başlık Ekle</h2>
+@model List<express_website.Models.BaslikClass>
 
-<form asp-action="Create" method="post">
-    <div class="form-group">
-        <label>Alt Başlık Adı</label>
-        <input asp-for="AltBaslikAdi" class="form-control" />
-        <span asp-validation-for="AltBaslikAdi" class="text-danger"></span>
+@foreach (var item in Model)
+{
+    <p>@item.BaslikAdi</p>
+}
+
+<h2>Yeni Alt Başlık Ekle</h2>
+
+<form asp-area="Admin" asp-controller="AltBaslik" asp-action="Create" method="post">
+    
+    <div class="mb-3">
+        <label for="altBaslikAdi" class="form-label">Alt Başlık Adı</label>
+        <input type="text" name="altBaslikAdi" class="form-control" required />
     </div>
-
     <div class="form-group">
-        <label>Başlık Seç</label>
-        <select asp-for="BaslikId" class="form-control" asp-items="@(new SelectList(ViewBag.Basliklar, "BaslikId", "BaslikAdi"))">
-            <option value="">Seçiniz</option>
+        <label for="baslikId" class="control-label">Başlık</label>
+        <select type="int" name="baslikId" class="form-control">
+            
+            @foreach (var item in Model)
+            {
+                <option value="@item.BaslikId">@item.BaslikAdi</option>
+
+            }
+            
         </select>
-        <span asp-validation-for="BaslikId" class="text-danger"></span>
+        <span asp-validation-for="baslikId" class="text-danger"></span>
     </div>
+
+    
 
     <button type="submit" class="btn btn-primary">Kaydet</button>
 </form>
+

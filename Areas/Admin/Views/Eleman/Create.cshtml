@@ -1,33 +1,41 @@
-@model express_website.Models.ElemanClass
 @{
     ViewData["Title"] = "Yeni Eleman Ekle";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
-    var altBasliklar = ViewBag.AltBasliklar as List<express_website.Models.AltBaslikClass>;
+}
+@model List<express_website.Models.AltBaslikClass>
+
+@foreach (var item in Model)
+{
+    <p>@item.AltBaslikAdi</p>
 }
 
 <h2>Yeni Eleman Ekle</h2>
 
-<form asp-action="Create" method="post">
-    <div class="form-group">
-        <label asp-for="ElemanAdi">Eleman Adı</label>
-        <input asp-for="ElemanAdi" class="form-control" />
+<form asp-area="Admin" asp-controller="Eleman" asp-action="Create" method="post">
+    
+    <div class="mb-3">
+        <label for="elemanAdi" class="form-label">Eleman Adı</label>
+        <input type="text" name="elemanAdi" class="form-control" required />
     </div>
-
-    <div class="form-group">
-        <label asp-for="ElemanMetin">Eleman Metni</label>
-        <textarea asp-for="ElemanMetin" class="form-control"></textarea>
+    <div class="mb-3">
+        <label for="elemanMetin" class="form-label">Eleman Metni</label>
+        <textarea name="elemanMetin" class="form-control" rows="5" required></textarea>
     </div>
-
     <div class="form-group">
-        <label asp-for="AltBaslikId">Alt Başlık</label>
-        <select asp-for="AltBaslikId" class="form-control">
-            <option value="">-- Seçiniz --</option>
-            @foreach (var alt in altBasliklar)
+        <label for="altBaslikId" class="control-label">Alt Başlık</label>
+        <select type="int" name="altBaslikId" class="form-control">
+            
+            @foreach (var item in Model)
             {
-                <option value="@alt.AltBaslikId">@alt.AltBaslikAdi</option>
+                <option value="@item.AltBaslikId">@item.AltBaslikAdi</option>
+
             }
+            
         </select>
+        <span asp-validation-for="altBaslikId" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-success mt-3">Kaydet</button>
+    
+
+    <button type="submit" class="btn btn-primary">Kaydet</button>
 </form>

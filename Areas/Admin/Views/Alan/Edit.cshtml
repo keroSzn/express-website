@@ -1,0 +1,39 @@
+@model List<express_website.Models.ElemanModeliClass>
+@{
+    ViewData["Title"] = "Alan Düzenle";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<h2>Alan Düzenle</h2>
+<h3>@ViewBag.EditAlan.AlanId</h3>
+
+<form asp-area="Admin" asp-controller="Alan" asp-action="Edit" method="post">
+    <input type="hidden" name="AlanId" value=@ViewBag.EditAlan.AlanId />
+    
+
+    
+
+    <div class="mb-3">
+        <label asp-for="@ViewBag.EditAlan.AlanAdi" class="form-label">Alan Adı</label>
+        <input type="text" name="AlanAdi" value="@ViewBag.EditAlan.AlanAdi"  class="form-control" required />
+        
+    </div>
+
+
+
+    <div class="form-group">
+        <label asp-for="ElemanModeliId" class="control-label">Ait Olduğu Eleman Modeli</label>
+        <select type="int" name="ElemanModeliId" class="form-control">
+            @foreach (var item in Model)
+            {
+                <option value="@item.ElemanModeliId">@item.ElemanModeliAdi</option>
+
+            }
+            
+        </select>
+        <span asp-validation-for="ElemanModeliId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Kaydet</button>
+</form>

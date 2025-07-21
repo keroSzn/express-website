@@ -24,9 +24,15 @@
             <tr>
                 <td><img src="@imageSrc" width="100" /></td>
                 <td>@item.ProjeAdi</td>
+                
                 <td>
-                    <a class="btn btn-danger btn-sm" href="/Admin/Project/Delete/@item.ProjeId">Sil</a>
+                    <form method="post" " onsubmit="return confirm('Silmek istediğinizden emin misiniz?');">
+                        <input type="hidden" name="id" value="@item.ProjeId" />
+                        <button type="submit"  class="btn btn-danger btn-sm">Sil</button>
+                    </form>
                 </td>
+                
+                
             </tr>
         }
     </tbody>

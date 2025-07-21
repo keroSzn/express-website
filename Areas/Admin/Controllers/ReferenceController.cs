@@ -29,7 +29,7 @@ namespace express_website.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Index(int id)
         {
-            Console.WriteLine("BBBBBBBBBBBB" + id);
+
             var silreferans = _context.Referans.Find(id);
             if (silreferans != null)
             {
@@ -65,22 +65,7 @@ namespace express_website.Areas.Admin.Controllers
 
             ViewBag.Error = "Lütfen bir dosya seçin.";
             return View();
-            /*var uploadPath = Path.Combine(_env.WebRootPath, "uploads/references");
-            if (!Directory.Exists(uploadPath))
-                Directory.CreateDirectory(uploadPath);
 
-            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
-            var filePath = Path.Combine(uploadPath, fileName);
-
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                imageFile.CopyTo(stream);
-            }
-
-            // Burada DB’ye görsel yolu eklenecek (arkadaşınla bağlantı kurulacak)
-            // Örn: db.References.Add(new Reference { ImagePath = "/uploads/references/" + fileName });
-
-            return RedirectToAction("Index");*/
 
 
         }

@@ -1,19 +1,38 @@
-@model express_website.Models.AlanClass
 @{
     ViewData["Title"] = "Yeni Alan Ekle";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+@model List<express_website.Models.ElemanModeliClass>
+
+@foreach (var item in Model)
+{
+    <p>@item.ElemanModeliAdi</p>
+}
 
 <h2>Yeni Alan Ekle</h2>
 
-<form asp-action="Create" method="post">
-    <div class="form-group">
-        <label asp-for="AlanAdi"></label>
-        <input asp-for="AlanAdi" class="form-control" />
+<form asp-area="Admin" asp-controller="Alan" asp-action="Create" method="post">
+    
+    <div class="mb-3">
+        <label for="AlanAdi" class="form-label">Alan Adı</label>
+        <input type="text" name="AlanAdi" class="form-control" required />
     </div>
+    
     <div class="form-group">
-        <label asp-for="ModelId"></label>
-        <input asp-for="ModelId" class="form-control" />
+        <label for="elemanModeliId" class="control-label">Ait Olduğu Eleman Modeli</label>
+        <select type="int" name="elemanModeliId" class="form-control">
+            
+            @foreach (var item in Model)
+            {
+                <option value="@item.ElemanModeliId">@item.ElemanModeliAdi</option>
+
+            }
+            
+        </select>
+        <span asp-validation-for="elemanModeliId" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-success mt-3">Kaydet</button>
+
+    
+
+    <button type="submit" class="btn btn-primary">Kaydet</button>
 </form>

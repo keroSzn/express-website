@@ -5,8 +5,8 @@
 }
 
 <h2>Kategori Listesi</h2>
+<a class="btn btn-primary mb-3" href="/Admin/Kategori/Create">Yeni Kategori Ekle</a>
 
-<a href="/Admin/Kategori/Create" class="btn btn-success mb-3">Yeni Kategori Ekle</a>
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -25,8 +25,16 @@
             <td>@item.KategoriAdi</td>
             <td>@item.KategoriMetin</td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.KategoriId" class="btn btn-sm btn-warning">Düzenle</a>
-                <a asp-action="Delete" asp-route-id="@item.KategoriId" class="btn btn-sm btn-danger">Sil</a>
+                @*Düzenle*@
+                <a href="Kategori/Edit?id=@item.KategoriId"><button type="submit"  class="btn btn-warning btn-sm">✏️ Düzenle</button></a>
+                @*Sil*@
+                <form method="post"  onsubmit="return confirm('Silmek istediğinizden emin misiniz?');">
+                    <input type="hidden" name="id" value=@item.KategoriId />
+                    <input type="hidden" name="komut" value=1 />
+                    <button type="submit"  class="btn btn-danger mt-2">🗑️ Sil</button>
+                </form>
+                @*<a asp-action="Edit" asp-route-id="@item.KategoriId" class="btn btn-sm btn-warning">Düzenle</a>
+                <a asp-action="Delete" asp-route-id="@item.KategoriId" class="btn btn-sm btn-danger">Sil</a>*@
             </td>
         </tr>
     }

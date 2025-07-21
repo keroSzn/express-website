@@ -9136,24 +9136,31 @@
     ]
   },
   "packageFolders": {
-    "/Users/keroszn/.nuget/packages/": {}
+    "C:\\Users\\Enes\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/keroszn/Desktop/express-website/express-website.csproj",
+      "projectUniqueName": "C:\\Users\\Enes\\kkkkkkkkkkkkk\\express-website\\express-website.csproj",
       "projectName": "express-website",
-      "projectPath": "/Users/keroszn/Desktop/express-website/express-website.csproj",
-      "packagesPath": "/Users/keroszn/.nuget/packages/",
-      "outputPath": "/Users/keroszn/Desktop/express-website/obj/",
+      "projectPath": "C:\\Users\\Enes\\kkkkkkkkkkkkk\\express-website\\express-website.csproj",
+      "packagesPath": "C:\\Users\\Enes\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Enes\\kkkkkkkkkkkkk\\express-website\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/Users/keroszn/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Enes\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -9220,7 +9227,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.301/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

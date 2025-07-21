@@ -1,0 +1,43 @@
+@model List<express_website.Models.AltBaslikClass>
+@{
+    ViewData["Title"] = "Eleman Düzenle";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<h2>Eleman Düzenle</h2>
+<h3>@ViewBag.EditEleman.ElemanId</h3>
+
+<form asp-area="Admin" asp-controller="Eleman" asp-action="Edit" method="post">
+    <input type="hidden" name="ElemanId" value=@ViewBag.EditEleman.ElemanId />
+    
+
+    
+
+    <div class="mb-3">
+        <label asp-for="@ViewBag.EditEleman.ElemanAdi" class="form-label">Eleman Adı</label>
+        <input type="text" name="ElemanAdi" value="@ViewBag.EditEleman.ElemanAdi"  class="form-control" required />
+        
+    </div>
+
+    <div class="mb-3"></div>
+        <label asp-for="@ViewBag.EditEleman.ElemanMetin" class="form-label">Eleman Metni</label>
+        <textarea name="ElemanMetin" class="form-control" rows="5" required>@ViewBag.EditEleman.ElemanMetin</textarea>
+        
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AltBaslikId" class="control-label">Alt Başlık</label>
+        <select type="int" name="AltBaslikId" class="form-control">
+            @foreach (var item in Model)
+            {
+                <option value="@item.AltBaslikId">@item.AltBaslikAdi</option>
+
+            }
+            
+        </select>
+        <span asp-validation-for="AltBaslikId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Kaydet</button>
+</form>

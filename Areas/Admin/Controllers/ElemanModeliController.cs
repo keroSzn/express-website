@@ -16,70 +16,85 @@ namespace express_website.Areas.Admin.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        /* ───────────── LIST ───────────── */
+        public async Task<IActionResult> Index()
         {
-            var model = _context.ElemanModeli
-                .Include(em => em.Eleman)
-                .ToList();
-            return View(model);
-        }
-
-        public IActionResult Create()
-        {
-            ViewBag.Elemanlar = _context.Eleman.ToList();
-            return View();
+            var elemanModelleri = await _context.ElemanModeli
+                .Include(b => b.Eleman)
+                .ToListAsync();
+            return View(elemanModelleri);
         }
 
         [HttpPost]
-        public IActionResult Create(ElemanModeliClass elemanModeli)
+        public IActionResult Index(int id, int komut)
         {
-            if (!ModelState.IsValid)
+            if (komut == 1)
             {
-                ViewBag.Elemanlar = _context.Eleman.ToList();
-                return View(elemanModeli);
+                //silme
+                var silElemanModeli = _context.ElemanModeli.Find(id);
+                if (silElemanModeli != null)
+                {
+                    _context.ElemanModeli.Remove(silElemanModeli);
+                    _context.SaveChanges();
+                }
+
+                return RedirectToAction("Index");
             }
 
-            _context.ElemanModeli.Add(elemanModeli);
+            //Console.WriteLine("BBBBBBBBBBBB" + id + "CCCCCCCCCCCC" + komut);
+            return RedirectToAction("Index");
+        }
+
+        /* ───────────── CREATE ───────────── */
+        public IActionResult Create()
+        {
+
+
+            return View(_context.Eleman.ToList());
+        }
+
+
+
+        [HttpPost]
+        public IActionResult Create(string elemanModeliAdi, int? fiyatBilgisi1, int? fiyatBilgisi2, int elemanId)
+        {
+            //Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + kategoriId);
+            var newElemanModeli = new ElemanModeliClass
+            {
+                ElemanModeliAdi = elemanModeliAdi,
+                FiyatBilgisi1 = fiyatBilgisi1,
+                FiyatBilgisi2 = fiyatBilgisi2,
+                ElemanId = elemanId,
+
+            };
+
+            _context.ElemanModeli.Add(newElemanModeli);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        /* ───────────── EDIT ───────────── */
 
         public IActionResult Edit(int id)
         {
-            var model = _context.ElemanModeli.FirstOrDefault(x => x.ElemanModeliId == id);
-            if (model == null) return NotFound();
+            var EditElemanModeli = _context.ElemanModeli.Find(id);
 
-            ViewBag.Elemanlar = _context.Eleman.ToList();
-            return View(model);
+            if (EditElemanModeli != null)
+            {
+                ViewBag.EditElemanModeli = EditElemanModeli;
+                return View(_context.Eleman.ToList());
+            }
+            return View();
         }
+
+
 
         [HttpPost]
-        public IActionResult Edit(ElemanModeliClass updated)
+        public IActionResult Edit(ElemanModeliClass EditElemanModeli)
         {
-            if (!ModelState.IsValid)
-            {
-                ViewBag.Elemanlar = _context.Eleman.ToList();
-                return View(updated);
-            }
 
-            var model = _context.ElemanModeli.FirstOrDefault(x => x.ElemanModeliId == updated.ElemanModeliId);
-            if (model == null) return NotFound();
 
-            model.ElemanModeliAdi = updated.ElemanModeliAdi;
-            model.FiyatBilgisi1 = updated.FiyatBilgisi1;
-            model.FiyatBilgisi2 = updated.FiyatBilgisi2;
-            model.ElemanId = updated.ElemanId;
-
-            _context.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult Delete(int id)
-        {
-            var model = _context.ElemanModeli.FirstOrDefault(x => x.ElemanModeliId == id);
-            if (model == null) return NotFound();
-
-            _context.ElemanModeli.Remove(model);
+            _context.ElemanModeli.Update(EditElemanModeli);
             _context.SaveChanges();
 
             return RedirectToAction("Index");

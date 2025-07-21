@@ -6,7 +6,7 @@ namespace express_website.Models
 
         public string? AlanAdi { get; set; }
 
-        public int ModelId { get; set; }
+        public int ElemanModeliId { get; set; }
 
         public ElemanModeliClass? ElemanModeli { get; set; }
         

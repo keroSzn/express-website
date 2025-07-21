@@ -10,10 +10,7 @@
 
 <form asp-area="Admin" asp-controller="Blog" asp-action="Edit" method="post">
     <input type="hidden" name="BlogId" value=@Model.BlogId />
-    @*<input type="hidden" name="id" value="@referans.ReferansId" />*@
-    @*<h3>@TempData["editBlogId"]</h3>
-    @TempData["editBlogIdYedek"]=@TempData["editBlogId"]
-    <h3>@TempData["editBlogIdYedek"]</h3>*@
+    
 
     <div class="mb-3">
         <label asp-for="@Model.BlogTarih" class="form-label">Tarih</label>

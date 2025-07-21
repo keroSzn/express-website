@@ -16,70 +16,84 @@ namespace express_website.Areas.Admin.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        /* ───────────── LIST ───────────── */
+        public async Task<IActionResult> Index()
         {
-            var elemanlar = _context.Eleman
-                .Include(e => e.AltBaslik)
-                .ToList();
+            var elemanlar = await _context.Eleman
+                .Include(b => b.AltBaslik)
+                .ToListAsync();
             return View(elemanlar);
         }
 
-        public IActionResult Create()
-        {
-            ViewBag.AltBasliklar = _context.AltBaslik.ToList();
-            return View();
-        }
-
         [HttpPost]
-        public IActionResult Create(ElemanClass eleman)
+        public IActionResult Index(int id, int komut)
         {
-            if (!ModelState.IsValid)
+            if (komut == 1)
             {
-                ViewBag.AltBasliklar = _context.AltBaslik.ToList();
-                return View(eleman);
+                //silme
+                var silEleman = _context.Eleman.Find(id);
+                if (silEleman != null)
+                {
+                    _context.Eleman.Remove(silEleman);
+                    _context.SaveChanges();
+                }
+
+                return RedirectToAction("Index");
             }
 
-            _context.Eleman.Add(eleman);
-            _context.SaveChanges();
-
+            //Console.WriteLine("BBBBBBBBBBBB" + id + "CCCCCCCCCCCC" + komut);
             return RedirectToAction("Index");
         }
+
+        /* ───────────── CREATE ───────────── */
+        public IActionResult Create()
+        {
+
+
+            return View(_context.AltBaslik.ToList());
+        }
+
+
+
+        [HttpPost]
+        public IActionResult Create(string elemanAdi, string elemanMetin, int altBaslikId)
+        {
+            //Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + kategoriId);
+            var newEleman = new ElemanClass
+            {
+                ElemanAdi = elemanAdi,
+                ElemanMetin = elemanMetin,
+                AltBaslikId = altBaslikId,
+
+            };
+
+            _context.Eleman.Add(newEleman);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        /* ───────────── EDIT ───────────── */
 
         public IActionResult Edit(int id)
         {
-            var eleman = _context.Eleman.FirstOrDefault(e => e.ElemanId == id);
-            if (eleman == null) return NotFound();
+            var EditEleman = _context.Eleman.Find(id);
 
-            ViewBag.AltBasliklar = _context.AltBaslik.ToList();
-            return View(eleman);
+            if (EditEleman != null)
+            {
+                ViewBag.EditEleman = EditEleman;
+                return View(_context.AltBaslik.ToList());
+            }
+            return View();
         }
+
+
 
         [HttpPost]
-        public IActionResult Edit(ElemanClass updated)
+        public IActionResult Edit(ElemanClass EditEleman)
         {
-            if (!ModelState.IsValid)
-            {
-                ViewBag.AltBasliklar = _context.AltBaslik.ToList();
-                return View(updated);
-            }
 
-            var eleman = _context.Eleman.FirstOrDefault(e => e.ElemanId == updated.ElemanId);
-            if (eleman == null) return NotFound();
 
-            eleman.ElemanAdi = updated.ElemanAdi;
-            eleman.ElemanMetin = updated.ElemanMetin;
-            eleman.AltBaslikId = updated.AltBaslikId;
-
-            _context.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult Delete(int id)
-        {
-            var eleman = _context.Eleman.FirstOrDefault(e => e.ElemanId == id);
-            if (eleman == null) return NotFound();
-
-            _context.Eleman.Remove(eleman);
+            _context.Eleman.Update(EditEleman);
             _context.SaveChanges();
 
             return RedirectToAction("Index");

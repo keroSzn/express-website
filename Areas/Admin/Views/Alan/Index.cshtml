@@ -17,15 +17,21 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var alan in Model)
+        @foreach (var item in Model)
         {
             <tr>
-                <td>@alan.AlanAdi</td>
-                <td>@alan.ModelId</td>
-                @*<td>@alan.AitOlduguElemanModeli?.ModelAdi</td>*@
+                <td>@item.AlanAdi</td>
+                <td>@item.ElemanModeliId</td>
+                
                 <td>
-                    <a asp-action="Edit" asp-route-id="@alan.AlanId" class="btn btn-warning btn-sm">Düzenle</a>
-                    <a asp-action="Delete" asp-route-id="@alan.AlanId" class="btn btn-danger btn-sm">Sil</a>
+                    @*Düzenle*@
+                    <a href="Alan/Edit?id=@item.AlanId"><button type="submit"  class="btn btn-warning btn-sm">✏️ Düzenle</button></a>
+                    @*Sil*@
+                    <form method="post"  onsubmit="return confirm('Silmek istediğinizden emin misiniz?');">
+                        <input type="hidden" name="id" value=@item.AlanId />
+                        <input type="hidden" name="komut" value=1 />
+                        <button type="submit"  class="btn btn-danger mt-2">🗑️ Sil</button>
+                    </form>   
                 </td>
             </tr>
         }

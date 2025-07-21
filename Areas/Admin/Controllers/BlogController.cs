@@ -22,10 +22,10 @@ namespace express_website.Areas.Admin.Controllers
             return View(blogs);
         }
 
-        /*[HttpPost]
+        [HttpPost]
         public IActionResult Index(int id, int komut)
         {
-            if (komut == 0)
+            if (komut == 1)
             {
                 //silme
                 var silblog = _context.Blog.Find(id);
@@ -37,27 +37,10 @@ namespace express_website.Areas.Admin.Controllers
 
                 return RedirectToAction("Index");
             }
-            if (komut == 1)
-            {
-                //düzenleme
-                var Editblog = _context.Blog.Find(id);
-                if (Editblog != null)
-                {
-                    /*_context.Blog.Update(editblog);
-                    _context.SaveChanges();*/
-        /*return View("Edit", Editblog);
-    }
-}
-Console.WriteLine("BBBBBBBBBBBB" + id+ "CCCCCCCCCCCC" +komut);
-/*var silreferans = _context.Referans.Find(id);
-if (silreferans != null)
-{
-    _context.Referans.Remove(silreferans);
-    _context.SaveChanges();
-}*/
 
-        /*return RedirectToAction("Index");
-    }*/
+            Console.WriteLine("BBBBBBBBBBBB" + id + "CCCCCCCCCCCC" + komut);
+            return RedirectToAction("Index");
+        }
 
         public IActionResult Create()
         {
@@ -80,15 +63,12 @@ if (silreferans != null)
             return RedirectToAction("Index");
         }
 
-        public IActionResult Edit(int blogId)
+        public IActionResult Edit(int id)
         {
-            var Editblog = _context.Blog.Find(blogId);
+            var Editblog = _context.Blog.Find(id);
 
             if (Editblog != null)
             {
-                /*_context.Blog.Update(editblog);
-                _context.SaveChanges();*/
-
 
                 return View(Editblog);
             }
@@ -100,49 +80,14 @@ if (silreferans != null)
         [HttpPost]
         public IActionResult Edit(BlogClass blog)
         {
-            /*
-            int blogId, DateOnly blogTarih, string blogBaslik, string blogMetin
-            */
+
 
             _context.Blog.Update(blog);
             _context.SaveChanges();
-            /*var blog = _context.Blog.Find(blogId);
-            if (blog == null)
-                return NotFound();
-*/
+
             return RedirectToAction("Index");
         }
 
-        /*[HttpPost]
-        
-        public IActionResult EditApprove(BlogClass updatedBlog)
-        {
-            if (!ModelState.IsValid)
-                return View(updatedBlog);
 
-            var blog = _context.Blog.FirstOrDefault(b => b.BlogId == updatedBlog.BlogId);
-            if (blog == null)
-                return NotFound();
-
-            blog.BlogTarih = updatedBlog.BlogTarih;
-            blog.BlogBaslik = updatedBlog.BlogBaslik;
-            blog.BlogMetin = updatedBlog.BlogMetin;
-
-            _context.SaveChanges();
-
-            return RedirectToAction("Index");
-        }*@
-
-        @*public IActionResult Delete(int id)
-        {
-            var blog = _context.Blog.FirstOrDefault(b => b.BlogId == id);
-            if (blog == null)
-                return NotFound();
-
-            _context.Blog.Remove(blog);
-            _context.SaveChanges();
-
-            return RedirectToAction("Index");
-        }*/
     }
 }

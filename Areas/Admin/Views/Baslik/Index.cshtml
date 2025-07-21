@@ -27,8 +27,15 @@
                 <td>@item.BaslikAdi</td>
                 <td>@item.Kategori?.KategoriAdi</td>
                 <td>
-                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@item.BaslikId">Düzenle</a>
-                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.BaslikId">Sil</a>
+                    @*Düzenle*@
+                    <a href="Baslik/Edit?id=@item.BaslikId"><button type="submit"  class="btn btn-warning btn-sm">✏️ Düzenle</button></a>
+                    @*Sil*@
+                    <form method="post"  onsubmit="return confirm('Silmek istediğinizden emin misiniz?');">
+                        <input type="hidden" name="id" value=@item.BaslikId />
+                        <input type="hidden" name="komut" value=1 />
+                        <button type="submit"  class="btn btn-danger mt-2">🗑️ Sil</button>
+                    </form>
+                    
                 </td>
             </tr>
         }

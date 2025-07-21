@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 
-
 namespace express_website.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -18,65 +17,83 @@ namespace express_website.Areas.Admin.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        /* ───────────── LIST ───────────── */
+        public async Task<IActionResult> Index()
         {
-            var alanlar = _context.Alan
-                .Include(a => a.ElemanModeli)
-                .ToList();
+            var alanlar = await _context.Alan
+                .Include(b => b.ElemanModeli)
+                .ToListAsync();
             return View(alanlar);
         }
 
-        public IActionResult Create()
-        {
-            return View();
-        }
-
         [HttpPost]
-        public IActionResult Create(AlanClass alan)
+        public IActionResult Index(int id, int komut)
         {
-            if (!ModelState.IsValid)
-                return View(alan);
+            if (komut == 1)
+            {
+                //silme
+                var silAlan = _context.Alan.Find(id);
+                if (silAlan != null)
+                {
+                    _context.Alan.Remove(silAlan);
+                    _context.SaveChanges();
+                }
 
-            _context.Alan.Add(alan);
-            _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
+            //Console.WriteLine("BBBBBBBBBBBB" + id + "CCCCCCCCCCCC" + komut);
             return RedirectToAction("Index");
         }
+
+        /* ───────────── CREATE ───────────── */
+        public IActionResult Create()
+        {
+
+
+            return View(_context.ElemanModeli.ToList());
+        }
+
+
+
+        [HttpPost]
+        public IActionResult Create(string alanAdi, int elemanModeliId)
+        {
+            //Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + kategoriId);
+            var newAlan = new AlanClass
+            {
+                AlanAdi = alanAdi,
+                ElemanModeliId = elemanModeliId,
+
+            };
+
+            _context.Alan.Add(newAlan);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        /* ───────────── EDIT ───────────── */
 
         public IActionResult Edit(int id)
         {
-            var alan = _context.Alan.FirstOrDefault(a => a.AlanId == id);
-            if (alan == null)
-                return NotFound();
+            var EditAlan = _context.Alan.Find(id);
 
-            return View(alan);
+            if (EditAlan != null)
+            {
+                ViewBag.EditAlan = EditAlan;
+                return View(_context.ElemanModeli.ToList());
+            }
+            return View();
         }
+
+
 
         [HttpPost]
-        public IActionResult Edit(AlanClass updated)
+        public IActionResult Edit(AlanClass EditAlan)
         {
-            if (!ModelState.IsValid)
-                return View(updated);
 
-            var alan = _context.Alan.FirstOrDefault(a => a.AlanId == updated.AlanId);
-            if (alan == null)
-                return NotFound();
 
-            alan.AlanAdi = updated.AlanAdi;
-            alan.ModelId = updated.ModelId;
-
-            _context.SaveChanges();
-
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult Delete(int id)
-        {
-            var alan = _context.Alan.FirstOrDefault(a => a.AlanId == id);
-            if (alan == null)
-                return NotFound();
-
-            _context.Alan.Remove(alan);
+            _context.Alan.Update(EditAlan);
             _context.SaveChanges();
 
             return RedirectToAction("Index");

@@ -5,7 +5,7 @@
 }
 
 <h2>Eleman Modelleri</h2>
-<a class="btn btn-primary mb-3" href="/Admin/ElemanModeli/Create">Yeni Model Ekle</a>
+<a class="btn btn-primary mb-3" href="/Admin/ElemanModeli/Create">Yeni Eleman Modeli Ekle</a>
 
 <table class="table table-bordered">
     <thead>
@@ -18,16 +18,23 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var model in Model)
+        @foreach (var item in Model)
         {
             <tr>
-                <td>@(model.ElemanModeliAdi)</td>
-                <td>@(model.FiyatBilgisi1)</td>
-                <td>@(model.FiyatBilgisi2)</td>
-                <td>@(model.Eleman?.ElemanAdi)</td>
+                <td>@(item.ElemanModeliAdi)</td>
+                <td>@(item.FiyatBilgisi1)</td>
+                <td>@(item.FiyatBilgisi2)</td>
+                <td>@(item.Eleman?.ElemanAdi)</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@(model.ElemanModeliId)" class="btn btn-warning btn-sm">Düzenle</a>
-                    <a asp-action="Delete" asp-route-id="@(model.ElemanModeliId)" class="btn btn-danger btn-sm">Sil</a>
+                    @*Düzenle*@
+                    <a href="ElemanModeli/Edit?id=@item.ElemanModeliId"><button type="submit"  class="btn btn-warning btn-sm">✏️ Düzenle</button></a>
+                    @*Sil*@
+                    <form method="post"  onsubmit="return confirm('Silmek istediğinizden emin misiniz?');">
+                        <input type="hidden" name="id" value=@item.ElemanModeliId />
+                        <input type="hidden" name="komut" value=1 />
+                        <button type="submit"  class="btn btn-danger mt-2">🗑️ Sil</button>
+                    </form>    
+                    
                 </td>
             </tr>
         }

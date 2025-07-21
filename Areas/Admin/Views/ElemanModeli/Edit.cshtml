@@ -1,0 +1,51 @@
+@model List<express_website.Models.ElemanClass>
+@{
+    ViewData["Title"] = "Eleman Modeli Düzenle";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<h2>Eleman Modeli Düzenle</h2>
+<h3>@ViewBag.EditElemanModeli.ElemanModeliId</h3>
+
+<form asp-area="Admin" asp-controller="ElemanModeli" asp-action="Edit" method="post">
+    <input type="hidden" name="ElemanModeliId" value=@ViewBag.EditElemanModeli.ElemanModeliId />
+    
+
+    
+
+    <div class="mb-3">
+        <label asp-for="@ViewBag.EditElemanModeli.ElemanModeliAdi" class="form-label">Eleman Modeli Adı</label>
+        <input type="text" name="ElemanModeliAdi" value="@ViewBag.EditElemanModeli.ElemanModeliAdi"  class="form-control" required />
+        
+    </div>
+
+
+    <div class="mb-3">
+        <label asp-for="@ViewBag.EditElemanModeli.FiyatBilgisi1" class="form-label">Fiyat Bilgisi 1</label>
+        <input type="int" name="FiyatBilgisi1" value="@ViewBag.EditElemanModeli.FiyatBilgisi1"  class="form-control" />
+        
+    </div>
+
+
+    <div class="mb-3">
+        <label asp-for="@ViewBag.EditElemanModeli.FiyatBilgisi2" class="form-label">Fiyat Bilgisi 2</label>
+        <input type="int" name="FiyatBilgisi2" value="@ViewBag.EditElemanModeli.FiyatBilgisi2"  class="form-control" />
+        
+    </div>    
+
+    <div class="form-group">
+        <label asp-for="ElemanId" class="control-label">Ait Olduğu Eleman</label>
+        <select type="int" name="ElemanId" class="form-control">
+            @foreach (var item in Model)
+            {
+                <option value="@item.ElemanId">@item.ElemanAdi</option>
+
+            }
+            
+        </select>
+        <span asp-validation-for="ElemanId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Kaydet</button>
+</form>

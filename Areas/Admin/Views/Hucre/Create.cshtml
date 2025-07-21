@@ -1,28 +1,38 @@
-@model express_website.Models.HucreClass
 @{
     ViewData["Title"] = "Yeni Hücre Ekle";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
-    var alanlar = ViewBag.Alanlar as List<express_website.Models.AlanClass>;
+}
+@model List<express_website.Models.AlanClass>
+
+@foreach (var item in Model)
+{
+    <p>@item.AlanAdi</p>
 }
 
 <h2>Yeni Hücre Ekle</h2>
 
-<form asp-action="Create" method="post">
-    <div class="form-group">
-        <label asp-for="HucreMetin">Hücre Metni</label>
-        <input asp-for="HucreMetin" class="form-control" />
+<form asp-area="Admin" asp-controller="Hucre" asp-action="Create" method="post">
+    
+    <div class="mb-3">
+        <label for="hucreMetin" class="form-label">Hücre Metni</label>
+        <textarea name="hucreMetin" class="form-control" rows="5" required></textarea>
     </div>
-
+    
     <div class="form-group">
-        <label asp-for="AlanId">Alan</label>
-        <select asp-for="AlanId" class="form-control">
-            <option value="">-- Seçiniz --</option>
-            @foreach (var alan in alanlar)
+        <label for="alanId" class="control-label">Ait Olduğu Alan</label>
+        <select type="int" name="alanId" class="form-control">
+            
+            @foreach (var item in Model)
             {
-                <option value="@alan.AlanId">@alan.AlanAdi</option>
+                <option value="@item.AlanId">@item.AlanAdi</option>
+
             }
+            
         </select>
+        <span asp-validation-for="alanId" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-success mt-3">Kaydet</button>
+    
+
+    <button type="submit" class="btn btn-primary">Kaydet</button>
 </form>

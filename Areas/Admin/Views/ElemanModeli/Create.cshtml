@@ -1,38 +1,45 @@
-@model express_website.Models.ElemanModeliClass
 @{
-    ViewData["Title"] = "Yeni Model Ekle";
+    ViewData["Title"] = "Yeni Eleman Modeli Ekle";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
-    var elemanlar = ViewBag.Elemanlar as List<express_website.Models.ElemanClass>;
+}
+@model List<express_website.Models.ElemanClass>
+
+@foreach (var item in Model)
+{
+    <p>@item.ElemanAdi</p>
 }
 
 <h2>Yeni Eleman Modeli Ekle</h2>
 
-<form asp-action="Create" method="post">
-    <div class="form-group">
-        <label asp-for="ElemanModeliAdi">Model Adı</label>
-        <input asp-for="ElemanModeliAdi" class="form-control" />
+<form asp-area="Admin" asp-controller="ElemanModeli" asp-action="Create" method="post">
+    
+    <div class="mb-3">
+        <label for="elemanModeliAdi" class="form-label">Eleman Modeli Adı</label>
+        <input type="text" name="elemanModeliAdi" class="form-control" required />
     </div>
-
-    <div class="form-group">
-        <label asp-for="FiyatBilgisi1">Fiyat Bilgisi 1</label>
-        <input asp-for="FiyatBilgisi1" class="form-control" />
+    <div class="mb-3">
+        <label for="fiyatBilgisi1" class="form-label">Fiyat Bilgisi 1</label>
+        <input type="int" name="fiyatBilgisi1" class="form-control"/>
     </div>
-
-    <div class="form-group">
-        <label asp-for="FiyatBilgisi2">Fiyat Bilgisi 2</label>
-        <input asp-for="FiyatBilgisi2" class="form-control" />
+    <div class="mb-3">
+        <label for="fiyatBilgisi2" class="form-label">Fiyat Bilgisi 2</label>
+        <input type="int" name="fiyatBilgisi2" class="form-control"/>
     </div>
-
     <div class="form-group">
-        <label asp-for="ElemanId">Ait Olduğu Eleman</label>
-        <select asp-for="ElemanId" class="form-control">
-            <option value="">-- Seçiniz --</option>
-            @foreach (var eleman in elemanlar)
+        <label for="elemanId" class="control-label">Ait Olduğu Eleman</label>
+        <select type="int" name="elemanId" class="form-control">
+            
+            @foreach (var item in Model)
             {
-                <option value="@eleman.ElemanId">@eleman.ElemanAdi</option>
+                <option value="@item.ElemanId">@item.ElemanAdi</option>
+
             }
+            
         </select>
+        <span asp-validation-for="elemanId" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-success mt-3">Kaydet</button>
+    
+
+    <button type="submit" class="btn btn-primary">Kaydet</button>
 </form>

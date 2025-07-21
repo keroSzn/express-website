@@ -27,6 +27,26 @@ namespace express_website.Areas.Admin.Controllers
             return View(kategoriler);
         }
 
+        [HttpPost]
+        public IActionResult Index(int id, int komut)
+        {
+            if (komut == 1)
+            {
+                //silme
+                var silKategori = _context.Kategori.Find(id);
+                if (silKategori != null)
+                {
+                    _context.Kategori.Remove(silKategori);
+                    _context.SaveChanges();
+                }
+
+                return RedirectToAction("Index");
+            }
+
+            Console.WriteLine("BBBBBBBBBBBB" + id + "CCCCCCCCCCCC" + komut);
+            return RedirectToAction("Index");
+        }
+
         /* ───────────── CREATE ───────────── */
         public IActionResult Create()
         {
@@ -51,58 +71,32 @@ namespace express_website.Areas.Admin.Controllers
         }
 
         /* ───────────── EDIT ───────────── */
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int id)
         {
-            if (id == null) return NotFound();
+            var EditKategori = _context.Kategori.Find(id);
 
-            var kategori = await _context.Kategori.FindAsync(id);
-            if (kategori == null) return NotFound();
-
-            return View(kategori);
-        }
-
-        [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, KategoriClass kategori)
-        {
-            if (id != kategori.KategoriId) return NotFound();
-            if (!ModelState.IsValid) return View(kategori);
-
-            try
+            if (EditKategori != null)
             {
-                _context.Update(kategori);
-                await _context.SaveChangesAsync();
+
+                return View(EditKategori);
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.Kategori.Any(e => e.KategoriId == id))
-                    return NotFound();
-                throw;
-            }
-            return RedirectToAction(nameof(Index));
+            return View();
         }
 
-        /* ───────────── DELETE ───────────── */
-        public async Task<IActionResult> Delete(int? id)
+
+
+        [HttpPost]
+        public IActionResult Edit(KategoriClass kategori)
         {
-            if (id == null) return NotFound();
 
-            var kategori = await _context.Kategori
-                                         .FirstOrDefaultAsync(m => m.KategoriId == id);
-            if (kategori == null) return NotFound();
 
-            return View(kategori);
+            _context.Kategori.Update(kategori);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
-        [HttpPost, ActionName("Delete"), ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var kategori = await _context.Kategori.FindAsync(id);
-            if (kategori != null)
-            {
-                _context.Kategori.Remove(kategori);
-                await _context.SaveChangesAsync();
-            }
-            return RedirectToAction(nameof(Index));
-        }
+        /**/
+
     }
 }

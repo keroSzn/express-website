@@ -1,0 +1,37 @@
+@model List<express_website.Models.KategoriClass>
+@{
+    ViewData["Title"] = "Baslik Düzenle";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<h2>Başlık Düzenle</h2>
+<h3>@ViewBag.EditBaslik.BaslikId</h3>
+
+<form asp-area="Admin" asp-controller="Baslik" asp-action="Edit" method="post">
+    <input type="hidden" name="BaslikId" value=@ViewBag.EditBaslik.BaslikId />
+    
+
+    
+
+    <div class="mb-3">
+        <label asp-for="@ViewBag.EditBaslik.BaslikAdi" class="form-label">Başlık Adı</label>
+        <input type="text" name="BaslikAdi" value="@ViewBag.EditBaslik.BaslikAdi"  class="form-control" required />
+        
+    </div>
+
+    <div class="form-group">
+        <label asp-for="KategoriId" class="control-label">Kategori</label>
+        <select type="int" name="KategoriId" class="form-control">
+            @foreach (var item in Model)
+            {
+                <option value="@item.KategoriId">@item.KategoriAdi</option>
+
+            }
+            
+        </select>
+        <span asp-validation-for="KategoriId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Kaydet</button>
+</form>

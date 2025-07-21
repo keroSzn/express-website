@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using express_website.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
-
 namespace express_website.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -16,73 +15,84 @@ namespace express_website.Areas.Admin.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        /* ───────────── LIST ───────────── */
+        public async Task<IActionResult> Index()
         {
-            var altbasliklar = _context.AltBaslik
-                .Include(x => x.Baslik)
-                .OrderByDescending(x => x.AltBaslikId)
-                .ToList();
-            return View(altbasliklar);
-        }
-
-        public IActionResult Create()
-        {
-            ViewBag.Basliklar = _context.Baslik.ToList();
-            return View();
+            var altBasliklar = await _context.AltBaslik
+                .Include(b => b.Baslik)
+                .ToListAsync();
+            return View(altBasliklar);
         }
 
         [HttpPost]
-        public IActionResult Create(AltBaslikClass altBaslik)
+        public IActionResult Index(int id, int komut)
         {
-            if (!ModelState.IsValid)
+            if (komut == 1)
             {
-                ViewBag.Basliklar = _context.Baslik.ToList();
-                return View(altBaslik);
+                //silme
+                var silAltBaslik = _context.AltBaslik.Find(id);
+                if (silAltBaslik != null)
+                {
+                    _context.AltBaslik.Remove(silAltBaslik);
+                    _context.SaveChanges();
+                }
+
+                return RedirectToAction("Index");
             }
 
-            _context.AltBaslik.Add(altBaslik);
+            //Console.WriteLine("BBBBBBBBBBBB" + id + "CCCCCCCCCCCC" + komut);
+            return RedirectToAction("Index");
+        }
+
+        /* ───────────── CREATE ───────────── */
+        public IActionResult Create()
+        {
+
+
+            return View(_context.Baslik.ToList());
+        }
+
+
+
+        [HttpPost]
+        public IActionResult Create(string altBaslikAdi, int baslikId)
+        {
+            //Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + kategoriId);
+            var newAltBaslik = new AltBaslikClass
+            {
+                AltBaslikAdi = altBaslikAdi,
+                BaslikId = baslikId,
+
+            };
+
+            _context.AltBaslik.Add(newAltBaslik);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        /* ───────────── EDIT ───────────── */
 
         public IActionResult Edit(int id)
         {
-            var altBaslik = _context.AltBaslik.FirstOrDefault(x => x.AltBaslikId == id);
-            if (altBaslik == null)
-                return NotFound();
+            var EditAltBaslik = _context.AltBaslik.Find(id);
 
-            ViewBag.Basliklar = _context.Baslik.ToList();
-            return View(altBaslik);
+            if (EditAltBaslik != null)
+            {
+                ViewBag.EditAltBaslik = EditAltBaslik;
+                return View(_context.Baslik.ToList());
+            }
+            return View();
         }
+
+
 
         [HttpPost]
-        public IActionResult Edit(AltBaslikClass altBaslik)
+        public IActionResult Edit(AltBaslikClass EditAltBaslik)
         {
-            if (!ModelState.IsValid)
-            {
-                ViewBag.Basliklar = _context.Baslik.ToList();
-                return View(altBaslik);
-            }
 
-            var original = _context.AltBaslik.FirstOrDefault(x => x.AltBaslikId == altBaslik.AltBaslikId);
-            if (original == null)
-                return NotFound();
 
-            original.AltBaslikAdi = altBaslik.AltBaslikAdi;
-            original.BaslikId = altBaslik.BaslikId;
-
+            _context.AltBaslik.Update(EditAltBaslik);
             _context.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult Delete(int id)
-        {
-            var altBaslik = _context.AltBaslik.FirstOrDefault(x => x.AltBaslikId == id);
-            if (altBaslik != null)
-            {
-                _context.AltBaslik.Remove(altBaslik);
-                _context.SaveChanges();
-            }
 
             return RedirectToAction("Index");
         }

@@ -29,6 +29,20 @@ namespace express_website.Areas.Admin.Controllers
             return View(_projects);
         }
 
+        [HttpPost]
+        public IActionResult Index(int id)
+        {
+
+            var silproje = _context.Proje.Find(id);
+            if (silproje != null)
+            {
+                _context.Proje.Remove(silproje);
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
+
         public IActionResult Create()
         {
             return View();

@@ -27,46 +27,35 @@ namespace express_website.Areas.Admin.Controllers
             return View(basliklar);
         }
 
+        [HttpPost]
+        public IActionResult Index(int id, int komut)
+        {
+            if (komut == 1)
+            {
+                //silme
+                var silBaslik = _context.Baslik.Find(id);
+                if (silBaslik != null)
+                {
+                    _context.Baslik.Remove(silBaslik);
+                    _context.SaveChanges();
+                }
+
+                return RedirectToAction("Index");
+            }
+
+            Console.WriteLine("BBBBBBBBBBBB" + id + "CCCCCCCCCCCC" + komut);
+            return RedirectToAction("Index");
+        }
+
         /* ───────────── CREATE ───────────── */
         public IActionResult Create()
         {
-            /*ViewBag.KategoriList = _context.Kategori
-                .Select(k => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
-                {
-                    Value = k.KategoriId.ToString(),
-                    Text = k.KategoriAdi
-                }).ToList();
-            return View();*/
 
-            //var KategoriList = new List<KategoriClass>();
 
             return View(_context.Kategori.ToList());
         }
 
-        /*[HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(string baslikAdi, int kategoriId)
-        {
-            
-                var newBaslik = new BaslikClass
-                {
-                    BaslikAdi = baslikAdi,
-                    KategoriId = kategoriId,
-                    
-                };
 
-                _context.Baslik.Add(newBaslik);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
-            
-            
-            /*ViewBag.KategoriList = _context.Kategori
-                .Select(k => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
-                {
-                    Value = k.KategoriId.ToString(),
-                    Text = k.KategoriAdi
-                }).ToList();
-            return View(newBaslik);
-        }*/
 
         [HttpPost]
         public IActionResult Create(string baslikAdi, int kategoriId)
@@ -85,63 +74,30 @@ namespace express_website.Areas.Admin.Controllers
         }
 
         /* ───────────── EDIT ───────────── */
-        public async Task<IActionResult> Edit(int? id)
+
+        public IActionResult Edit(int id)
         {
-            if (id == null) return NotFound();
-            var baslik = await _context.Baslik.FindAsync(id);
-            if (baslik == null) return NotFound();
+            var EditBaslik = _context.Baslik.Find(id);
 
-            ViewBag.KategoriList = _context.Kategori
-                .Select(k => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
-                {
-                    Value = k.KategoriId.ToString(),
-                    Text = k.KategoriAdi
-                }).ToList();
-
-            return View(baslik);
-        }
-
-        [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, BaslikClass baslik)
-        {
-            if (id != baslik.BaslikId) return NotFound();
-            if (!ModelState.IsValid)
+            if (EditBaslik != null)
             {
-                ViewBag.KategoriList = _context.Kategori
-                    .Select(k => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
-                    {
-                        Value = k.KategoriId.ToString(),
-                        Text = k.KategoriAdi
-                    }).ToList();
-                return View(baslik);
+                ViewBag.EditBaslik = EditBaslik;
+                return View(_context.Kategori.ToList());
             }
-
-            _context.Update(baslik);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return View();
         }
 
-        /* ───────────── DELETE ───────────── */
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null) return NotFound();
-            var baslik = await _context.Baslik
-                .Include(b => b.Kategori)
-                .FirstOrDefaultAsync(m => m.BaslikId == id);
-            if (baslik == null) return NotFound();
-            return View(baslik);
-        }
 
-        [HttpPost, ActionName("Delete"), ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+
+        [HttpPost]
+        public IActionResult Edit(BaslikClass EditBaslik)
         {
-            var baslik = await _context.Baslik.FindAsync(id);
-            if (baslik != null)
-            {
-                _context.Baslik.Remove(baslik);
-                await _context.SaveChangesAsync();
-            }
-            return RedirectToAction(nameof(Index));
+
+
+            _context.Baslik.Update(EditBaslik);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }
