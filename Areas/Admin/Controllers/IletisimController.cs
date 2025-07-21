@@ -21,13 +21,26 @@ namespace express_website.Areas.Admin.Controllers
             return View(iletisimler);
         }
 
-        public IActionResult Details(int id)
+        [HttpPost]
+        public IActionResult Index(int id, int komut)
         {
-            var iletisim = _context.Iletisim.FirstOrDefault(i => i.IletisimId == id);
-            if (iletisim == null)
-                return NotFound();
+            if (komut == 1)
+            {
+                //silme
+                var silIletisim = _context.Iletisim.Find(id);
+                if (silIletisim != null)
+                {
+                    _context.Iletisim.Remove(silIletisim);
+                    _context.SaveChanges();
+                }
 
-            return View(iletisim);
+                return RedirectToAction("Index");
+            }
+
+            //Console.WriteLine("BBBBBBBBBBBB" + id + "CCCCCCCCCCCC" + komut);
+            return RedirectToAction("Index");
         }
+
+        
     }
 }
