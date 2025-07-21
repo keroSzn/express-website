@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using express_website.Models;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace express_website.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class ReferenceController : Controller
     {
         private AppDbContext _context;
@@ -19,7 +21,7 @@ namespace express_website.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            
+
             var references = _context.Referans.ToList();
             return View(references);
         }
@@ -83,11 +85,11 @@ namespace express_website.Areas.Admin.Controllers
 
         }
 
-        
 
-        
 
-        
+
+
+
 
 
     }

@@ -3,10 +3,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using express_website.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace express_website.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class BaslikController : Controller
     {
         private readonly AppDbContext _context;
@@ -69,12 +71,12 @@ namespace express_website.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(string baslikAdi, int kategoriId)
         {
-            Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+kategoriId);
+            Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + kategoriId);
             var newBaslik = new BaslikClass
             {
                 BaslikAdi = baslikAdi,
                 KategoriId = kategoriId,
-                
+
             };
 
             _context.Baslik.Add(newBaslik);

@@ -3,10 +3,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using express_website.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace express_website.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class KategoriController : Controller
     {
         private readonly AppDbContext _context;
@@ -32,7 +34,7 @@ namespace express_website.Areas.Admin.Controllers
             return View();
         }
 
-        
+
         [HttpPost]
         public IActionResult Create(string kategoriAdi, string kategoriMetin)
         {

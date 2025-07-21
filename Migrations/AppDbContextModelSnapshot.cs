@@ -22,6 +22,204 @@ namespace express_website.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
+
             modelBuilder.Entity("express_website.Models.AlanClass", b =>
                 {
                     b.Property<int>("AlanId")
@@ -30,18 +228,18 @@ namespace express_website.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AlanId"));
 
-                    b.Property<int?>("AitOlduguElemanModeliElemanModeliId")
-                        .HasColumnType("int");
-
                     b.Property<string>("AlanAdi")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ElemanModeliId")
+                        .HasColumnType("int");
 
                     b.Property<int>("ModelId")
                         .HasColumnType("int");
 
                     b.HasKey("AlanId");
 
-                    b.HasIndex("AitOlduguElemanModeliElemanModeliId");
+                    b.HasIndex("ElemanModeliId");
 
                     b.ToTable("Alan");
                 });
@@ -54,9 +252,6 @@ namespace express_website.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AltBaslikId"));
 
-                    b.Property<int?>("AitOlduguBaslikBaslikId")
-                        .HasColumnType("int");
-
                     b.Property<string>("AltBaslikAdi")
                         .HasColumnType("nvarchar(max)");
 
@@ -65,7 +260,7 @@ namespace express_website.Migrations
 
                     b.HasKey("AltBaslikId");
 
-                    b.HasIndex("AitOlduguBaslikBaslikId");
+                    b.HasIndex("BaslikId");
 
                     b.ToTable("AltBaslik");
                 });
@@ -81,15 +276,12 @@ namespace express_website.Migrations
                     b.Property<string>("BaslikAdi")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("KategoriClassKategoriId")
-                        .HasColumnType("int");
-
                     b.Property<int>("KategoriId")
                         .HasColumnType("int");
 
                     b.HasKey("BaslikId");
 
-                    b.HasIndex("KategoriClassKategoriId");
+                    b.HasIndex("KategoriId");
 
                     b.ToTable("Baslik");
                 });
@@ -124,9 +316,6 @@ namespace express_website.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ElemanId"));
 
-                    b.Property<int?>("AitOlduguAltBaslikAltBaslikId")
-                        .HasColumnType("int");
-
                     b.Property<int>("AltBaslikId")
                         .HasColumnType("int");
 
@@ -138,7 +327,7 @@ namespace express_website.Migrations
 
                     b.HasKey("ElemanId");
 
-                    b.HasIndex("AitOlduguAltBaslikAltBaslikId");
+                    b.HasIndex("AltBaslikId");
 
                     b.ToTable("Eleman");
                 });
@@ -150,9 +339,6 @@ namespace express_website.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ElemanModeliId"));
-
-                    b.Property<int?>("AitOlduguElemanElemanId")
-                        .HasColumnType("int");
 
                     b.Property<int>("ElemanId")
                         .HasColumnType("int");
@@ -168,7 +354,7 @@ namespace express_website.Migrations
 
                     b.HasKey("ElemanModeliId");
 
-                    b.HasIndex("AitOlduguElemanElemanId");
+                    b.HasIndex("ElemanId");
 
                     b.ToTable("ElemanModeli");
                 });
@@ -197,9 +383,6 @@ namespace express_website.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HucreId"));
 
-                    b.Property<int?>("AitOlduguAlanAlanId")
-                        .HasColumnType("int");
-
                     b.Property<int>("AlanId")
                         .HasColumnType("int");
 
@@ -208,9 +391,34 @@ namespace express_website.Migrations
 
                     b.HasKey("HucreId");
 
-                    b.HasIndex("AitOlduguAlanAlanId");
+                    b.HasIndex("AlanId");
 
                     b.ToTable("Hucre");
+                });
+
+            modelBuilder.Entity("express_website.Models.IletisimClass", b =>
+                {
+                    b.Property<int>("IletisimId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IletisimId"));
+
+                    b.Property<string>("IletisimAdSoyad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IletisimKonu")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IletisimMail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IletisimMesaj")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IletisimId");
+
+                    b.ToTable("Iletisim");
                 });
 
             modelBuilder.Entity("express_website.Models.KategoriClass", b =>
@@ -267,58 +475,119 @@ namespace express_website.Migrations
                     b.ToTable("Referans");
                 });
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("express_website.Models.AlanClass", b =>
                 {
-                    b.HasOne("express_website.Models.ElemanModeliClass", "AitOlduguElemanModeli")
+                    b.HasOne("express_website.Models.ElemanModeliClass", "ElemanModeli")
                         .WithMany("AlanListe")
-                        .HasForeignKey("AitOlduguElemanModeliElemanModeliId");
+                        .HasForeignKey("ElemanModeliId");
 
-                    b.Navigation("AitOlduguElemanModeli");
+                    b.Navigation("ElemanModeli");
                 });
 
             modelBuilder.Entity("express_website.Models.AltBaslikClass", b =>
                 {
-                    b.HasOne("express_website.Models.BaslikClass", "AitOlduguBaslik")
+                    b.HasOne("express_website.Models.BaslikClass", "Baslik")
                         .WithMany("AltBaslikListe")
-                        .HasForeignKey("AitOlduguBaslikBaslikId");
+                        .HasForeignKey("BaslikId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("AitOlduguBaslik");
+                    b.Navigation("Baslik");
                 });
 
             modelBuilder.Entity("express_website.Models.BaslikClass", b =>
                 {
-                    b.HasOne("express_website.Models.KategoriClass", "KategoriClass")
+                    b.HasOne("express_website.Models.KategoriClass", "Kategori")
                         .WithMany("BaslikListe")
-                        .HasForeignKey("KategoriClassKategoriId");
+                        .HasForeignKey("KategoriId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("KategoriClass");
+                    b.Navigation("Kategori");
                 });
 
             modelBuilder.Entity("express_website.Models.ElemanClass", b =>
                 {
-                    b.HasOne("express_website.Models.AltBaslikClass", "AitOlduguAltBaslik")
+                    b.HasOne("express_website.Models.AltBaslikClass", "AltBaslik")
                         .WithMany("ElemanListe")
-                        .HasForeignKey("AitOlduguAltBaslikAltBaslikId");
+                        .HasForeignKey("AltBaslikId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("AitOlduguAltBaslik");
+                    b.Navigation("AltBaslik");
                 });
 
             modelBuilder.Entity("express_website.Models.ElemanModeliClass", b =>
                 {
-                    b.HasOne("express_website.Models.ElemanClass", "AitOlduguEleman")
+                    b.HasOne("express_website.Models.ElemanClass", "Eleman")
                         .WithMany("ElemanModeliListe")
-                        .HasForeignKey("AitOlduguElemanElemanId");
+                        .HasForeignKey("ElemanId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("AitOlduguEleman");
+                    b.Navigation("Eleman");
                 });
 
             modelBuilder.Entity("express_website.Models.HucreClass", b =>
                 {
-                    b.HasOne("express_website.Models.AlanClass", "AitOlduguAlan")
+                    b.HasOne("express_website.Models.AlanClass", "Alan")
                         .WithMany("HucreListe")
-                        .HasForeignKey("AitOlduguAlanAlanId");
+                        .HasForeignKey("AlanId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("AitOlduguAlan");
+                    b.Navigation("Alan");
                 });
 
             modelBuilder.Entity("express_website.Models.AlanClass", b =>

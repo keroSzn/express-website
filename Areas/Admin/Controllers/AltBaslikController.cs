@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using express_website.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace express_website.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class AltBaslikController : Controller
     {
         private readonly AppDbContext _context;

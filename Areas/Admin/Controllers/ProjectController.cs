@@ -2,10 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 using express_website.Models;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace express_website.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class ProjectController : Controller
     {
         private AppDbContext _context;

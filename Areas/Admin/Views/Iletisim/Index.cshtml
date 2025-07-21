@@ -1,0 +1,33 @@
+@model List<express_website.Models.IletisimClass>
+@{
+    ViewData["Title"] = "İletişim Listesi";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}   
+
+<h2>@ViewData["Title"]</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Ad Soyad</th>
+            <th>Email</th>
+            <th>Mesaj</th>
+            <th>Konu</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.IletisimId</td>
+            <td>@item.IletisimAdSoyad</td>
+            <td>@item.IletisimMail</td>
+            <td>@item.IletisimMesaj</td>
+            <td>@item.IletisimKonu</td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.IletisimId" class="btn btn-sm btn-danger">Sil</a>
+            </td>
+        </tr>
+    }
+    </tbody>

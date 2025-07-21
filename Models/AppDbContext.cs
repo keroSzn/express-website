@@ -1,13 +1,13 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace express_website.Models
 {
-    public class AppDbContext : DbContext
+    // DbContext yerine IdentityDbContext kullanacağız
+    public class AppDbContext : IdentityDbContext<IdentityUser>
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-        {
-
-        }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<HakkimizdaClass> Hakkimizda { get; set; }
         public DbSet<KategoriClass> Kategori { get; set; }
@@ -21,8 +21,11 @@ namespace express_website.Models
         public DbSet<ProjeClass> Proje { get; set; }
         public DbSet<BlogClass> Blog { get; set; }
         public DbSet<IletisimClass> Iletisim { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder); // Identity tablolarını eklemesi için
+
             modelBuilder.Entity<KategoriClass>().HasKey(x => x.KategoriId);
             modelBuilder.Entity<HakkimizdaClass>().HasKey(x => x.HakkimizdaId);
             modelBuilder.Entity<BaslikClass>().HasKey(x => x.BaslikId);
@@ -36,7 +39,5 @@ namespace express_website.Models
             modelBuilder.Entity<BlogClass>().HasKey(x => x.BlogId);
             modelBuilder.Entity<IletisimClass>().HasKey(x => x.IletisimId);
         }
-        
-
     }
 }

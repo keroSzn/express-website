@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using express_website.Models;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace express_website.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class BlogController : Controller
     {
         private readonly AppDbContext _context;
@@ -43,19 +45,19 @@ namespace express_website.Areas.Admin.Controllers
                 {
                     /*_context.Blog.Update(editblog);
                     _context.SaveChanges();*/
-                    /*return View("Edit", Editblog);
-                }
-            }
-            Console.WriteLine("BBBBBBBBBBBB" + id+ "CCCCCCCCCCCC" +komut);
-            /*var silreferans = _context.Referans.Find(id);
-            if (silreferans != null)
-            {
-                _context.Referans.Remove(silreferans);
-                _context.SaveChanges();
-            }*/
+        /*return View("Edit", Editblog);
+    }
+}
+Console.WriteLine("BBBBBBBBBBBB" + id+ "CCCCCCCCCCCC" +komut);
+/*var silreferans = _context.Referans.Find(id);
+if (silreferans != null)
+{
+    _context.Referans.Remove(silreferans);
+    _context.SaveChanges();
+}*/
 
-            /*return RedirectToAction("Index");
-        }*/
+        /*return RedirectToAction("Index");
+    }*/
 
         public IActionResult Create()
         {
@@ -81,8 +83,8 @@ namespace express_website.Areas.Admin.Controllers
         public IActionResult Edit(int blogId)
         {
             var Editblog = _context.Blog.Find(blogId);
-            
-                if (Editblog != null)
+
+            if (Editblog != null)
             {
                 /*_context.Blog.Update(editblog);
                 _context.SaveChanges();*/
@@ -93,15 +95,15 @@ namespace express_website.Areas.Admin.Controllers
             return View();
         }
 
-        
+
 
         [HttpPost]
         public IActionResult Edit(BlogClass blog)
         {
-              /*
-              int blogId, DateOnly blogTarih, string blogBaslik, string blogMetin
-              */  
-            
+            /*
+            int blogId, DateOnly blogTarih, string blogBaslik, string blogMetin
+            */
+
             _context.Blog.Update(blog);
             _context.SaveChanges();
             /*var blog = _context.Blog.Find(blogId);
