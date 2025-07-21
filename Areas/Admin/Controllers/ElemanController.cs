@@ -34,11 +34,17 @@ namespace express_website.Areas.Admin.Controllers
                 var silEleman = _context.Eleman.Find(id);
                 if (silEleman != null)
                 {
+                    if (_context.ElemanModeli.Any(x => x.ElemanId == id))
+                    {
+                        TempData["ElemanSilmeHata"] = "Bu elemana bağlı eleman modelleri var. Önce onları silmelisiniz.";
+                        return RedirectToAction("Index");
+                    }
                     _context.Eleman.Remove(silEleman);
                     _context.SaveChanges();
+                    return RedirectToAction("Index");
                 }
 
-                return RedirectToAction("Index");
+                
             }
 
             //Console.WriteLine("BBBBBBBBBBBB" + id + "CCCCCCCCCCCC" + komut);

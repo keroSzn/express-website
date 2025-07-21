@@ -2421,7 +2421,6 @@ c:/Users/Enes/kkkkkkkkkkkkk/express-website/obj/Debug/net9.0/rjsmcshtml.dswa.cac
 c:/Users/Enes/kkkkkkkkkkkkk/express-website/obj/Debug/net9.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css
 c:/Users/Enes/kkkkkkkkkkkkk/express-website/obj/Debug/net9.0/scopedcss/bundle/express-website.styles.css
 c:/Users/Enes/kkkkkkkkkkkkk/express-website/obj/Debug/net9.0/scopedcss/projectbundle/express-website.bundle.scp.css
-c:/Users/Enes/kkkkkkkkkkkkk/express-website/obj/Debug/net9.0/compressed/1zjzypywyu-523itqrgsc.gz
 c:/Users/Enes/kkkkkkkkkkkkk/express-website/obj/Debug/net9.0/compressed/h42droybp8-61n19gt1b8.gz
 c:/Users/Enes/kkkkkkkkkkkkk/express-website/obj/Debug/net9.0/compressed/kgta43z232-2y5207q154.gz
 c:/Users/Enes/kkkkkkkkkkkkk/express-website/obj/Debug/net9.0/compressed/bawxe3l4v7-t1cqhe9u97.gz
@@ -7227,7 +7226,6 @@ c:\Users\Enes\kkkkkkkkkkkkk\express-website\obj\Debug\net9.0\rjsmcshtml.dswa.cac
 c:\Users\Enes\kkkkkkkkkkkkk\express-website\obj\Debug\net9.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 c:\Users\Enes\kkkkkkkkkkkkk\express-website\obj\Debug\net9.0\scopedcss\bundle\express-website.styles.css
 c:\Users\Enes\kkkkkkkkkkkkk\express-website\obj\Debug\net9.0\scopedcss\projectbundle\express-website.bundle.scp.css
-c:\Users\Enes\kkkkkkkkkkkkk\express-website\obj\Debug\net9.0\compressed\1zjzypywyu-523itqrgsc.gz
 c:\Users\Enes\kkkkkkkkkkkkk\express-website\obj\Debug\net9.0\compressed\h42droybp8-61n19gt1b8.gz
 c:\Users\Enes\kkkkkkkkkkkkk\express-website\obj\Debug\net9.0\compressed\kgta43z232-2y5207q154.gz
 c:\Users\Enes\kkkkkkkkkkkkk\express-website\obj\Debug\net9.0\compressed\bawxe3l4v7-t1cqhe9u97.gz
@@ -9464,3 +9462,4 @@ c:\Users\Enes\kkkkkkkkkkkkk\express-website\obj\Debug\net9.0\refint\express-webs
 c:\Users\Enes\kkkkkkkkkkkkk\express-website\obj\Debug\net9.0\express-website.pdb
 C:\Users\Enes\kkkkkkkkkkkkk\express-website\obj\Debug\net9.0\express-website.genruntimeconfig.cache
 C:\Users\Enes\kkkkkkkkkkkkk\express-website\obj\Debug\net9.0\ref\express-website.dll
+c:\Users\Enes\kkkkkkkkkkkkk\express-website\obj\Debug\net9.0\compressed\1zjzypywyu-g13lobrxlc.gz

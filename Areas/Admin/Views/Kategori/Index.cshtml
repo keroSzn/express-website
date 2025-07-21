@@ -5,11 +5,20 @@
 }
 
 <h2>Kategori Listesi</h2>
-<a class="btn btn-primary mb-3" href="/Admin/Kategori/Create">Yeni Kategori Ekle</a>
+
+@if (TempData["KategoriSilmeHata"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["KategoriSilmeHata"]
+    </div>
+}
+
+<a class="btn btn-success mb-3" href="/Admin/Kategori/Create">➕ Yeni Kategori Ekle</a>
+
 
 
 <table class="table table-bordered table-striped">
-    <thead>
+    <thead class="table-dark">
         <tr>
             <th>ID</th>
             <th>Kategori Adı</th>

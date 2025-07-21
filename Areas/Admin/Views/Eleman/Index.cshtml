@@ -5,21 +5,31 @@
 }
 
 <h2>Elemanlar</h2>
-<a class="btn btn-primary mb-3" href="/Admin/Eleman/Create">Yeni Eleman Ekle</a>
 
-<table class="table table-bordered">
-    <thead>
+@if (TempData["ElemanSilmeHata"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["ElemanSilmeHata"]
+    </div>
+}
+
+<a class="btn btn-success mb-3" href="/Admin/Eleman/Create">➕ Yeni Eleman Ekle</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
         <tr>
-            <th>Eleman Adı</th>
-            <th>Eleman Metni</th>
-            <th>Ait Olduğu Alt Başlık</th>
-            <th>İşlemler</th>
+            <th scope="col">Id</th>
+            <th scope="col">📝 Eleman Adı</th>
+            <th scope="col">📝 Eleman Metni</th>
+            <th scope="col">📝 Ait Olduğu Alt Başlık</th>
+            <th scope="col">⚙️ İşlemler</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
+                <td>@item.ElemanId</td>
                 <td>@item.ElemanAdi</td>
                 <td>@item.ElemanMetin</td>
                 <td>@item.AltBaslik?.AltBaslikAdi</td>

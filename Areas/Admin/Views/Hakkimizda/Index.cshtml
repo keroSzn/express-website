@@ -1,0 +1,26 @@
+@model express_website.Models.HakkimizdaClass
+
+@{
+    ViewData["Title"] = "Hakkımızda";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 class="mt-3 mb-4">📚 Hakkımızda</h2>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">📝 Metin</th>
+            <th scope="col">⚙️ İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>        
+        <tr>
+            <td>@Model.HakkimizdaMetin</td>
+            <td>
+                @*Düzenle*@
+                <a href="Hakkimizda/Edit?id=@Model"><button type="submit"  class="btn btn-warning btn-sm">✏️ Düzenle</button></a>                    
+            </td>
+        </tr>    
+    </tbody>
+</table>

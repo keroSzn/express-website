@@ -4,15 +4,24 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 <h2>Alt Başlıklar</h2>
-<a href="/Admin/AltBaslik/Create" class="btn btn-success">Yeni Alt Başlık</a>
 
-<table class="table table-bordered mt-3">
-    <thead>
+@if (TempData["AltBaslikSilmeHata"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["AltBaslikSilmeHata"]
+    </div>
+}
+
+<a class="btn btn-success mb-3" href="/Admin/AltBaslik/Create">➕ Yeni Alt Başlık Ekle</a>
+
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
         <tr>
-            <th>#</th>
-            <th>Alt Başlık</th>
-            <th>Başlık</th>
-            <th>İşlemler</th>
+            <th scope="col">Id</th>
+            <th scope="col">📝 Alt Başlık Adı</th>
+            <th scope="col">📝 Ait Olduğu Başlık</th>
+            <th scope="col">⚙️ İşlemler</th>
         </tr>
     </thead>
     <tbody>

@@ -35,11 +35,17 @@ namespace express_website.Areas.Admin.Controllers
                 var silAlan = _context.Alan.Find(id);
                 if (silAlan != null)
                 {
+                    if (_context.Hucre.Any(x => x.AlanId == id))
+                    {
+                        TempData["AlanSilmeHata"] = "Bu alana bağlı hücreler var. Önce onları silmelisiniz.";
+                        return RedirectToAction("Index");
+                    }
                     _context.Alan.Remove(silAlan);
                     _context.SaveChanges();
+                    return RedirectToAction("Index");
                 }
 
-                return RedirectToAction("Index");
+                
             }
 
             //Console.WriteLine("BBBBBBBBBBBB" + id + "CCCCCCCCCCCC" + komut);

@@ -6,17 +6,22 @@
 
 <h2>Başlıklar</h2>
 
-<p>
-    <a class="btn btn-success" href="/Admin/Baslik/Create">Yeni Başlık Ekle</a>
-</p>
+@if (TempData["BaslikSilmeHata"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["BaslikSilmeHata"]
+    </div>
+}
 
-<table class="table">
-    <thead>
+<a class="btn btn-success mb-3" href="/Admin/Baslik/Create">➕ Yeni Baslik Ekle</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
         <tr>
-            <th>#</th>
-            <th>Başlık Adı</th>
-            <th>Kategori</th>
-            <th>İşlem</th>
+            <th scope="col">Id</th>
+            <th scope="col">📝 Başlık Adı</th>
+            <th scope="col">📝 Ait Olduğu Kategori</th>
+            <th scope="col">⚙️ İşlemler</th>
         </tr>
     </thead>
     <tbody>

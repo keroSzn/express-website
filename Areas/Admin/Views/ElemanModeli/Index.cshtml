@@ -5,22 +5,32 @@
 }
 
 <h2>Eleman Modelleri</h2>
-<a class="btn btn-primary mb-3" href="/Admin/ElemanModeli/Create">Yeni Eleman Modeli Ekle</a>
 
-<table class="table table-bordered">
-    <thead>
+@if (TempData["ElemanModeliSilmeHata"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["ElemanModeliSilmeHata"]
+    </div>
+}
+
+<a class="btn btn-success mb-3" href="/Admin/ElemanModeli/Create">➕ Yeni Eleman Modeli Ekle</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
         <tr>
-            <th>Model Adı</th>
-            <th>Fiyat 1</th>
-            <th>Fiyat 2</th>
-            <th>Ait Olduğu Eleman</th>
-            <th>İşlemler</th>
+            <th scope="col">Id</th>
+            <th scope="col">📝 Eleman Modeli Adı</th>
+            <th scope="col">$ Liste Fiyatı (Boş Bırakılabilir)</th>
+            <th scope="col">$ Kampanyalı Satış Fiyatı (Boş Bırakılabilir)</th>
+            <th scope="col">📝 Ait Olduğu Eleman</th>
+            <th scope="col">⚙️ İşlemler</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
+                <td>@(item.ElemanModeliId)</td>
                 <td>@(item.ElemanModeliAdi)</td>
                 <td>@(item.FiyatBilgisi1)</td>
                 <td>@(item.FiyatBilgisi2)</td>

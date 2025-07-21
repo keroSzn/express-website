@@ -34,16 +34,23 @@ namespace express_website.Areas.Admin.Controllers
             {
                 //silme
                 var silKategori = _context.Kategori.Find(id);
+
                 if (silKategori != null)
                 {
+                    if (_context.Baslik.Any(x => x.KategoriId == id))
+                    {
+                        TempData["KategoriSilmeHata"] = "Bu kategoriye bağlı başlıklar var. Önce onları silmelisiniz.";
+                        return RedirectToAction("Index");
+                    }
                     _context.Kategori.Remove(silKategori);
                     _context.SaveChanges();
+                    return RedirectToAction("Index");
                 }
 
-                return RedirectToAction("Index");
+                
             }
 
-            Console.WriteLine("BBBBBBBBBBBB" + id + "CCCCCCCCCCCC" + komut);
+            //Console.WriteLine("BBBBBBBBBBBB" + id + "CCCCCCCCCCCC" + komut);
             return RedirectToAction("Index");
         }
 

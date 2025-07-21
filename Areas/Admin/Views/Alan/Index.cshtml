@@ -5,23 +5,32 @@
 }
 
 <h2>Alan Listesi</h2>
-<a class="btn btn-primary mb-3" href="/Admin/Alan/Create">Yeni Alan Ekle</a>
 
-<table class="table table-bordered">
-    <thead>
+@if (TempData["AlanSilmeHata"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["AlanSilmeHata"]
+    </div>
+}
+
+<a class="btn btn-success mb-3" href="/Admin/Alan/Create">➕ Yeni Alan Ekle</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
         <tr>
-            <th>Alan Adı</th>
-            <th>Model ID</th>
-            <th>İlişkili Eleman Modeli</th>
-            <th>İşlemler</th>
+            <th scope="col">Id</th>
+            <th scope="col">📝 Alan Adı</th>
+            <th scope="col">📝 Ait Olduğu Eleman Modeli</th>
+            <th scope="col">⚙️ İşlemler</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
+                <td>@item.AlanId</td>
                 <td>@item.AlanAdi</td>
-                <td>@item.ElemanModeliId</td>
+                <td>@item.ElemanModeli?.ElemanModeliAdi</td>
                 
                 <td>
                     @*Düzenle*@

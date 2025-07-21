@@ -21,7 +21,7 @@ public class HomeController : Controller
     {
         var viewModel = new HomePageViewModel
         {
-            HakkimizdaList = _context.Hakkimizda.ToList(),
+            Hakkimizda = _context.Hakkimizda.Find(1),
             Projeler = _context.Proje.ToList(),
             Blog = _context.Blog.ToList(),
             Referanslar = _context.Referans.ToList(),

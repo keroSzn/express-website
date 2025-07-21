@@ -1,64 +1,7 @@
-<style>
-  #hero-carousel {
-    padding: 0;
-    margin: 0;
-  }
-
-  .carousel-inner {
-    height: 140vh;
-  }
-
-  .carousel-inner img {
-    height: 140vh;
-    object-fit: cover;
-  }
-
-  .carousel-caption {
-    background-color: rgba(0, 0, 0, 0.4);
-    padding: 1rem;
-    border-radius: 8px;
-  }
-</style>
-<section id="hero-carousel" class="hero section dark-background">
-
-  <div id="demo" class="carousel slide" data-bs-ride="carousel">
-    
-    <!-- Indicators/dots -->
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#demo" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#demo" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-
-    <!-- Carousel Inner -->
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="/img/gustas-brazaitis-xNKy-Cu20d4-unsplash.jpg" class="d-block w-100 img-fluid" alt="Modern Software UI">
-        <div class="carousel-caption d-none d-md-block">
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="/img/ilya-pavlov-OqtafYT5kTw-unsplash.jpg" class="d-block w-100 img-fluid" alt="Teamwork">
-        <div class="carousel-caption d-none d-md-block">
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="/img/michael-jerrard-JnLp1kus3Ks-unsplash.jpg" class="d-block w-100 img-fluid" alt="UX Design">
-        <div class="carousel-caption d-none d-md-block">
-        </div>
-      </div>
-    </div>
-
-    <!-- Controls -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-
+<section class="hero-section position-relative" style="height: 100vh; overflow: hidden;">
+  <img src="/img/Background_Server.jpg" class="w-100 img-fluid" alt="Üretim Arka Plan" style="object-fit: cover;">
+  <div class="hero-overlay position-absolute top-50 start-50 translate-middle text-center text-white">
+    <h1 class="display-4 fw-bold text-danger">Geleceği Üretiyoruz</h1>
+    <p class="lead">@(DateTime.Now.Year-1999) YILDIR BAŞARI HİKAYEMİZİ SİZLERLE YAZIYORUZ.</p>
   </div>
-
 </section>

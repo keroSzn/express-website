@@ -5,33 +5,40 @@
 @model List<express_website.Models.ReferansClass>
 
 <h2>Referans Görselleri</h2>
-<a href="/Admin/Reference/Create" class="btn btn-primary mb-3">Yeni Görsel Yükle</a>
+<a href="/Admin/Reference/Create" class="btn btn-success mb-3">➕ Yeni Görsel Ekle</a>
 
-<div class="row">
-    @foreach (var item in Model)
-    {
-        var base64Image = Convert.ToBase64String(item.ReferansGorsel ?? new byte[0]);
-        var imageSrc = $"data:image/jpeg;base64,{base64Image}";
-
-        <div class="col-md-3 text-center mb-3">
-            <img src="@imageSrc" class="img-fluid rounded border" />
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Görsel</th>
+            <th scope="col">⚙️ İşlemler</th>
+        </tr>
+    </thead>    
+    <tbody>
+        @*<div class="row">*@
             
-            @*<a asp-controller="Reference" asp-action="Delete" asp-route-id="@referans.ReferansId">Sil</a>*@
-            @*<a asp-area="Admin" asp-controller="Reference" asp-action="Delete" asp-route-id="@referans.ReferansId" class="btn btn-danger mt-2">Sil</a>
-
-            
-
-            @*<form asp-controller="Reference" asp-action="Remove" asp-route-id="@referans.ReferansId" onsubmit="return confirm('Bu görseli silmek istediğinizden emin misiniz?');">
-                
-                <button type="submit" class="btn btn-danger mt-2">Sil</button>
-            </form>*@
-              
-            <form method="post" " onsubmit="return confirm('Silmek istediğinizden emin misiniz?');">
-                <input type="hidden" name="id" value="@item.ReferansId" />
-                @*<button type="submit" class="btn btn-primary">Kaydet</button>*@
-                <button type="submit"  class="btn btn-danger mt-2">Sil</button>
-            </form>
-        </div>
-    }
-</div>
-
+            @foreach (var item in Model)
+            {
+                var base64Image = Convert.ToBase64String(item.ReferansGorsel ?? new byte[0]);
+                var imageSrc = $"data:image/jpeg;base64,{base64Image}";
+                <tr>
+                    <td>@item.ReferansId</td>
+                    <td><img src="@imageSrc" height="200" /></td>
+                    <td><form method="post" " onsubmit="return confirm('Silmek istediğinizden emin misiniz?');">
+                        <input type="hidden" name="id" value="@item.ReferansId" />
+                        
+                        <button type="submit"  class="btn btn-danger mt-2">🗑️ Sil</button>
+                    </form></td>
+                <div class="col-md-3 text-center mb-3">
+                    
+                    
+                    
+                    
+                    
+                </div>
+                </tr>
+            }
+        @*</div>*@
+    </tbody>
+</table>

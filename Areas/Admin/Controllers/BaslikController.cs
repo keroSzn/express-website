@@ -36,14 +36,20 @@ namespace express_website.Areas.Admin.Controllers
                 var silBaslik = _context.Baslik.Find(id);
                 if (silBaslik != null)
                 {
+                    if (_context.AltBaslik.Any(x => x.BaslikId == id))
+                    {
+                        TempData["BaslikSilmeHata"] = "Bu başlığa bağlı alt başlıklar var. Önce onları silmelisiniz.";
+                        return RedirectToAction("Index");
+                    }
                     _context.Baslik.Remove(silBaslik);
                     _context.SaveChanges();
+                    return RedirectToAction("Index");
                 }
 
-                return RedirectToAction("Index");
+                
             }
 
-            Console.WriteLine("BBBBBBBBBBBB" + id + "CCCCCCCCCCCC" + komut);
+            //Console.WriteLine("BBBBBBBBBBBB" + id + "CCCCCCCCCCCC" + komut);
             return RedirectToAction("Index");
         }
 

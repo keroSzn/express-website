@@ -33,11 +33,17 @@ namespace express_website.Areas.Admin.Controllers
                 var silAltBaslik = _context.AltBaslik.Find(id);
                 if (silAltBaslik != null)
                 {
+                    if (_context.Eleman.Any(x => x.AltBaslikId == id))
+                    {
+                        TempData["AltBaslikSilmeHata"] = "Bu alt başlığa bağlı elemanlar var. Önce onları silmelisiniz.";
+                        return RedirectToAction("Index");
+                    }
                     _context.AltBaslik.Remove(silAltBaslik);
                     _context.SaveChanges();
+                    return RedirectToAction("Index");
                 }
 
-                return RedirectToAction("Index");
+                
             }
 
             //Console.WriteLine("BBBBBBBBBBBB" + id + "CCCCCCCCCCCC" + komut);
